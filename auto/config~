@@ -1,0 +1,8 @@
+#!/bin/sh
+
+lb config noauto \
+	--distribution wheezy\
+	-k 486\
+	--mirror-bootstrap ftp://ftp.egr.msu.edu\
+	--mirror-binary ftp://ftp.egr.msu.edu\
+	"${@}"
