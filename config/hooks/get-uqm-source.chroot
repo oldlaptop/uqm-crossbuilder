@@ -1,0 +1,11 @@
+#! /bin/sh
+#
+# Downloads the UQM source tarball and places it within /etc/skel
+
+# envvar UQM_URL
+#
+# URL of the desired UQM source tarball.
+export UQM_URL="http://downloads.sourceforge.net/project/sc2/UQM/0.7/uqm-0.7.0-source.tgz?r=http%3A%2F%2Fsc2.sourceforge.net%2Fdownloads.php&ts=1351712087&use_mirror=iweb"
+
+cd /etc/skel
+wget ${UQM_URL}
