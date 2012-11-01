@@ -138,7 +138,7 @@ _QUIET="false"
 #_VERBOSE="false"
 
 # Internal stuff (FIXME)
-APT_OPTIONS="--yes"
+APT_OPTIONS="-y --force-yes"
 APTITUDE_OPTIONS="--assume-yes"
 GZIP_OPTIONS="-6 --rsyncable"
 ISOHYBRID_OPTIONS=""

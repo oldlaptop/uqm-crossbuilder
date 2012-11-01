@@ -2,9 +2,10 @@
 
 # envvar DEBIAN_MIRROR
 # The URL of the Debian mirror to get packages from.
-export DEBIAN_MIRROR="ftp://ftp.egr.msu.edu"
+export DEBIAN_MIRROR="ftp://ftp.egr.msu.edu/debian"
 
 lb config noauto \
+	--apt-options "-y --force-yes"\
 	--distribution wheezy\
 	-k 486\
 	--mirror-bootstrap ${DEBIAN_MIRROR}\

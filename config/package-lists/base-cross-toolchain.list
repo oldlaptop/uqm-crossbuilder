@@ -1,7 +1,6 @@
-! echo "Processing base-cross-toolchain.list"
-
+build-essential
 mingw-w64-i686-dev
 binutils-mingw-w64-i686
-gcc-minw-w64-base
+gcc-mingw-w64-base
 gcc-mingw-w64-i686
 g++-mingw-w64-i686

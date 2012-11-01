@@ -3,6 +3,7 @@
 # Builds and installs libsdl for the cross toolchain.
 # Sourced from build-uqm-dependencies.chroot
 
+echo "***********************************************************************************************"
 echo "--- BEGIN: crossbuild_libsdl ---"
 
 cd /tmp
@@ -26,6 +27,7 @@ fi
 if [ -f configure ]; then
 	./configure\
 		--host=${HOST_TRIPLET}\
+		--build=i686-linux-gnu\
 		--prefix=/usr/${HOST_TRIPLET}
 else
 	echo "crossbuild_libsdl failed: Could not find ./configure (is libsdl source tarball sane?)"
@@ -35,10 +37,11 @@ fi
 if [ -f Makefile ]; then
 	make clean
 	make
-#	make install
+	make install
 else
 	echo "crossbuild_libsdl failed: Could not find Makefile (did ./configure fail?)"
 	exit 1
 fi
 
 echo "--- END: crossbuild_libsdl ---"
+echo "***********************************************************************************************"

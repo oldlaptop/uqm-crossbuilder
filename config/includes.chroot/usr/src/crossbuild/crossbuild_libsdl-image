@@ -6,6 +6,7 @@
 # libsdl_image is an SDL package, and thus we need some extra LDFLAGS for SDL
 export SDL_LIBS="-lmingw32 -lSDLmain -lSDL"
 
+echo "***********************************************************************************************"
 echo "--- BEGIN: crossbuild_libsdl_image ---"
 
 cd /tmp
@@ -28,6 +29,7 @@ fi
 if [ -f configure ]; then
 	./configure\
 		--host=${HOST_TRIPLET}\
+		--build=i686-linux-gnu\
 		--prefix=/usr/${HOST_TRIPLET}
 else
 	echo "crossbuild_libsdl_image failed: Could not find ./configure (is libsdl_image source tarball sane?)"
@@ -37,10 +39,11 @@ fi
 if [ -f Makefile ]; then
 	make clean
 	make
-#	make install
+	make install
 else
 	echo "crossbuild_libsdl_image failed: Could not find Makefile (did ./configure fail?)"
 	exit 1
 fi
 
 echo "--- END: crossbuild_libsdl_image ---"
+echo "***********************************************************************************************"
