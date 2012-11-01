@@ -1,0 +1,6 @@
+Most of the build-time 'magic' that sets the cross-toolchain up for compiling UQM happens
+in a set of shell scripts, called from a chroot-stage hook (that is, the hook is called by
+lb build while setting up the chroot). The hook (config/hooks/build-uqm-dependencies.chroot)
+acts merely as a wrapper, specifying envvars for the crossbuild_foo scripts which reside in
+'config/includes.chroot/usr/src/crossbuild'. If for some reason you need to modify the build
+process, please read build-uqm-dependencies.chroot, and one of the crossbuild_foo scripts.
