@@ -1,0 +1,11 @@
+This is a live-build configuration intended to cross-build UQM for Windows within a 
+VM. It is however designed with modification in mind and should be easily adaptable
+to different host systems and different programs.
+
+To build a hybrid (CD/DVD/USB stick) ISO from these files:
+
+1) install live-build: http://live.debian.net/manual-3.x/html/live-manual.en.html#100
+2) Run 'lb config' from within this repo's root
+3) Run 'lb build' to create the ISO (must have root/fakeroot)
+
+
