@@ -11,7 +11,7 @@ ln -s /usr/${HOST_TRIPLET}/libogg_d.lib			/usr/${HOST_TRIPLET}/ogg_d.lib
 ln -s /usr/${HOST_TRIPLET}/libogg_static.lib		/usr/${HOST_TRIPLET}/ogg_static.lib
 ln -s /usr/${HOST_TRIPLET}/libogg_static_d.lib		/usr/${HOST_TRIPLET}/ogg_static_d.lib
 
-ln -s /usr/${HOST_TRIPLET}/libvorbis.lib		/usr/${HOST_TRIPLET/vorbis.lib
+ln -s /usr/${HOST_TRIPLET}/libvorbis.lib		/usr/${HOST_TRIPLET}/vorbis.lib
 ln -s /usr/${HOST_TRIPLET}/libvorbis_d.lib		/usr/${HOST_TRIPLET}/vorbis_d.lib
 ln -s /usr/${HOST_TRIPLET}/libvorbis_static.lib		/usr/${HOST_TRIPLET}/vorbis_static.lib
 ln -s /usr/${HOST_TRIPLET}/libvorbis_static_d.lib	/usr/${HOST_TRIPLET}/vorbis_static_d.lib
