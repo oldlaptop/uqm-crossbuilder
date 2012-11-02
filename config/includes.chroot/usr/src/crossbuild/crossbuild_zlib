@@ -42,8 +42,8 @@ if [ -f win32/Makefile.gcc ]; then
 	echo "Installing *.dll"
 	cp *.dll   /usr/${HOST_TRIPLET}/bin
 
-	echo "Installing *.lib"
-	cp *.lib   /usr/${HOST_TRIPLET}/lib
+#	echo "Installing *.lib"
+#	cp *.lib   /usr/${HOST_TRIPLET}/lib
 
 	echo "Installing *.a"
 	cp *.a     /usr/${HOST_TRIPLET}/lib
