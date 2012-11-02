@@ -7,7 +7,7 @@
 # libogg and libvorbis install as e.g. 'libvorbisfile.dll.a', when UQM looks for
 # 'vorbisfile.dll.a', we need to correct this.
 ln -s /usr/${HOST_TRIPLET}/libogg.lib			/usr/${HOST_TRIPLET}/ogg.lib
-ln -s /usr/${HOST_TRIPLET}/libogg_d.lib			/usr/${HOST_TRIPLET/ogg_d.lib
+ln -s /usr/${HOST_TRIPLET}/libogg_d.lib			/usr/${HOST_TRIPLET}/ogg_d.lib
 ln -s /usr/${HOST_TRIPLET}/libogg_static.lib		/usr/${HOST_TRIPLET}/ogg_static.lib
 ln -s /usr/${HOST_TRIPLET}/libogg_static_d.lib		/usr/${HOST_TRIPLET}/ogg_static_d.lib
 
