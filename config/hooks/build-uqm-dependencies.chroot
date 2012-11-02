@@ -5,9 +5,6 @@
 # This script is merely a wrapper, it specifies envvars for the scripts that do
 # the actual work, then launches them. Only this script should be called directly.
 
-# Uncomment the following line to keep build directories intact.
-export KEEP_TEMP="1"
-
 # envvar HOST_TRIPLET
 #
 # This is used as the host triplet for the cross toolchain.
@@ -60,6 +57,7 @@ echo ""
 echo ""
 echo "Finished building UQM dependencies"
 
-if [ ! ${KEEP_TEMP} ]; then
-	rm /tmp/*
-fi
+echo ""
+echo "Perpetrating acts of horrific kludgery against the toolchain"
+
+. /usr/src/crossbuild/toolchain-ugly-hacks
