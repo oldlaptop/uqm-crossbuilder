@@ -37,22 +37,22 @@ if [ -f win32/Makefile.gcc ]; then
 	ranlib *.a
 
 	echo "Installing *.exe"
-	cp *.exe   /usr/${HOST_TRIPLET}/bin
+	install -D *.exe   /usr/${HOST_TRIPLET}/bin/*.exe
 
 	echo "Installing *.dll"
-	cp *.dll   /usr/${HOST_TRIPLET}/bin
+	install -D *.dll   /usr/${HOST_TRIPLET}/bin/*.dll
 
 #	echo "Installing *.lib"
 #	cp *.lib   /usr/${HOST_TRIPLET}/lib
 
 	echo "Installing *.a"
-	cp *.a     /usr/${HOST_TRIPLET}/lib
+	install -D cp *.a     /usr/${HOST_TRIPLET}/lib/*.a
 
 	echo "Installing *.h"
-	cp *.h     /usr/${HOST_TRIPLET}/include
+	install -D *.h     /usr/${HOST_TRIPLET}/include/*.h
 	
 	echo "Installing zlib.pc"
-	cp zlib.pc /usr/${HOST_TRIPLET}/lib/pkgconfig
+	install -D zlib.pc /usr/${HOST_TRIPLET}/lib/pkgconfig/zlib.pc
 else
 	echo "crossbuild_zlib failed: Could not find Makefile (is the zlib source tarball sane?)"
 	exit 1
