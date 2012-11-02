@@ -37,19 +37,19 @@ if [ -f win32/Makefile.gcc ]; then
 	ranlib *.a
 
 	echo "Installing *.exe"
-	install -D *.exe   /usr/${HOST_TRIPLET}/bin/*.exe
+	install *.exe   /usr/${HOST_TRIPLET}/bin/
 
 	echo "Installing *.dll"
-	install -D *.dll   /usr/${HOST_TRIPLET}/bin/*.dll
+	install *.dll   /usr/${HOST_TRIPLET}/bin/
 
 #	echo "Installing *.lib"
 #	cp *.lib   /usr/${HOST_TRIPLET}/lib
 
 	echo "Installing *.a"
-	install -D cp *.a     /usr/${HOST_TRIPLET}/lib/*.a
+	install *.a    /usr/${HOST_TRIPLET}/lib/
 
 	echo "Installing *.h"
-	install -D *.h     /usr/${HOST_TRIPLET}/include/*.h
+	install *.h     /usr/${HOST_TRIPLET}/include/
 	
 	echo "Installing zlib.pc"
 	install -D zlib.pc /usr/${HOST_TRIPLET}/lib/pkgconfig/zlib.pc
