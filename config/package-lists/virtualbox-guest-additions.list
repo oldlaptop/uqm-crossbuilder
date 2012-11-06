@@ -3,5 +3,6 @@ linux-headers-3.2.0-4-486
 #endif
 
 dkms
+virtualbox
 virtualbox-guest-dkms
 virtualbox-guest-utils
