@@ -1,5 +1,5 @@
 #if LINUX_FLAVORS 486
-linux-headers-3.2.0-4-486
+linux-headers-486
 #endif
 
 dkms
