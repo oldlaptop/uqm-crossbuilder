@@ -8,6 +8,7 @@ lb config noauto \
 	--apt-options "-y --force-yes"\
 	--distribution wheezy\
 	-k 486\
+	--architecture i386\
 	--mirror-bootstrap ${DEBIAN_MIRROR}\
 	--mirror-binary ${DEBIAN_MIRROR}\
 	"${@}"
