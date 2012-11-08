@@ -16,13 +16,9 @@
 # then starts that machine and executes a build script inside it
 # The produced executables and build logs are then found in the shared folder
 #
-#
-# envvar: SHARED_DIR
-#
 
-export SHARED_DIR="shared_directory"
-export IMAGE_NAME="uqm_crossbuilder.iso"
-
+SHARED_DIR="uqm-crossbuilder-share"
+IMAGE_NAME="uqm_crossbuilder.iso"
 CURRENT_DIR=`pwd`
 VANILLA_EXE="uqm.exe"
 BALANCE_EXE="uqm-balance.exe"
@@ -113,6 +109,14 @@ if [ $? -ne 0 ]; then
     rm ./testhd*
 fi
 
+echo "Creating a shared folder"
+vboxmanage sharedfolder add "UQM_crossbuilder_001" --name "uqm-crossbuilder-share" --hostpath $CURRENT_DIR/$SHARED_DIR
+if [ $? -ne 0 ]; then
+    echo "vboxmanage returned an error while creating the shared folder at $CURRENT_DIR/$SHARED_DIR"
+    vboxmanage unregistervm "UQM_crossbuilder_001" -delete
+    rm ./testhd*
+fi
+
 echo "Starting the Virtual Machine"
 vboxmanage startvm "UQM_crossbuilder_001" --type headless
 if [ $? -ne 0 ]; then
@@ -144,8 +148,28 @@ echo "The build probably takes a while, so wait warmly  "
 echo "##################################################"
 
 sleep 30
+
+echo "Mounting shared folder"
+vboxmanage guestcontrol execute "UQM_crossbuilder_001" "/usr/bin/sudo" --username "user" --password "live" --verbose "/bin/mkdir /vbox_share"
+if [ $? -ne 0 ]; then
+    echo "Error at creating shared folder on guest"
+    cleanup
+    exit 6
+fi
+
+echo "Folder created on guest"
+
+vboxmanage guestcontrol execute "UQM_crossbuilder_001" "/usr/bin/sudo" --username "user" --password "live" --verbose "/bin/mount -t vboxsf uqm-crossbuilder-share /vbox_share"
+if [ $? -ne 0 ]; then
+    echo "Error at mounting shared folder on guest"
+    cleanup
+    exit 6
+fi
+
+echo "Shared folder mounted successfully"
+exit 1
+
 echo "Sending the build command to the Virtual Machine"
-# Send a command to launch the build
 
 if [ $BUILD_VANILLA ]; then
     vboxmanage guestcontrol execute "UQM_crossbuilder_001" "/bin/bash $BUILD_SCRIPT_PATH vanilla" --username "user"
