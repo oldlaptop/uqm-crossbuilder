@@ -14,49 +14,50 @@
 #
 # The URL of the network repository to get Balance Mod git from,
 # as passed to git-clone.
-export BALANCE_GIT_URL="https://github.com/Roisack/Shiver-Balance-Mod.git"
+BALANCE_GIT_URL="git://github.com/Roisack/Shiver-Balance-Mod.git"
 
 mount /vbox_share
 
 if [ `echo $@ | grep "vanilla"` ]; then
+	mkdir /tmp/uqm
 	tar -zxf /usr/src/uqm/uqm*.tgz -C /tmp/uqm
-	cd /tmp/uqm/
+	cd /tmp/uqm/uqm-0.7.0
 	cp /etc/skel/cross-build.sh .
 	cp /usr/src/uqm/config.state.vanilla ./config.state
-	echo "Configuring vanilla" >> /vbox_share/build_log
-	sh cross-build.sh uqm reprocess_config 2>&1 >> /vbox_share/build_log
-	sh cross-build.sh uqm 2>&1 >> /vbox_share/build_log
+	echo "Configuring vanilla"
+	sh cross-build.sh uqm reprocess_config
+	sh cross-build.sh uqm
 
 	if [ -f *.exe ]; then
 		cp *.exe /vbox_share
 	else
-		echo "No executables found!" >> /vbox_share/build_log
+		echo "No executables found!"
 		exit 1
 	fi
 fi
 
-if [ `echo $@ | grep "balance" $@` ]; then
+if [ `echo $@ | grep "balance"` ]; then
 	cd /tmp
-	git clone ${BALANCE_GIT_URL}
+	git clone $BALANCE_GIT_URL
 	cd Shiver-Balance-Mod
 	cp /etc/skel/cross-build.sh .
 
 	git checkout master
 	cp /usr/src/uqm/config.state.balance ./config.state
-	echo "Configuring balance" >> /vbox_share/build_log
-	sh cross-build.sh uqm reprocess_config 2>&1 >> /vbox_share/build_log
-	sh cross-build.sh uqm 2>&1 >> /vbox_share/build_log
+	echo "Configuring balance"
+	sh cross-build.sh uqm reprocess_config
+	sh cross-build.sh uqm
 
 	git checkout allow-retreat
 	cp /usr/src/uqm/config.state.balance-retreat ./config.state
-	echo "Configuring balance-retreat" >> /vbox_share/build_log
-	sh cross-build.sh uqm reprocess_config 2>&1 >> /vbox_share/build_log
-	sh cross-build.sh uqm 2>&1 >> /vbox_share/build_log
+	echo "Configuring balance-retreat"
+	sh cross-build.sh uqm reprocess_config
+	sh cross-build.sh uqm
 
 	if [ -f *.exe ]; then
 		cp *.exe /vbox_share
 	else
-		echo "No executables found!" >> /vbox_share/build_log
+		echo "No executables found!"
 		exit 1
 	fi
 fi
