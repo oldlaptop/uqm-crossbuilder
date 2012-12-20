@@ -53,8 +53,8 @@ echo "Building UQM dependencies"
 echo ""
 
 . /usr/src/crossbuild/crossbuild_libiconv
-. /usr/src/crossbuild/crossbuild_libpng
 . /usr/src/crossbuild/crossbuild_zlib
+. /usr/src/crossbuild/crossbuild_libpng
 . /usr/src/crossbuild/crossbuild_libogg
 . /usr/src/crossbuild/crossbuild_libvorbis
 . /usr/src/crossbuild/crossbuild_libsdl
