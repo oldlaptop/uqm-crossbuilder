@@ -4,11 +4,11 @@
 # Sourced from build-uqm-dependencies.chroot
 
 echo "***********************************************************************************************"
-echo "--- BEGIN: crossbuild_png ---"
+echo "--- BEGIN: crossbuild_libpng ---"
 
 cd /tmp
 
-wget --output-document=/tmp/libpng.tar.gz ${LIBPNG_URL}
+wget --output-document=/tmp/libpng.tar.zx ${LIBPNG_URL}
 
 if [ -f libpng.tar.gz ]; then
 
@@ -16,7 +16,7 @@ if [ -f libpng.tar.gz ]; then
 		mkdir libpg
 	fi
 
-	tar -zxf libpng.tar.gz -C libpng
+	tar -Jxf libpng.tar.xz -C libpng
 	cd libpng/libpng*
 else
 	echo "crossbuild_libpng failed: Could not get/extract libpng source"
