@@ -19,6 +19,11 @@ export HOST_TRIPLET="i686-w64-mingw32"
 # Specifies the URL of the libiconv source tarball you want to use.
 export LIBICONV_URL="ftp://ftp.wayne.edu/pub/gnu/libiconv/libiconv-1.14.tar.gz"
 
+# envvar LIBPNG_URL
+#
+# Specifies the URL of the libpng source tarball you want to use.
+export LIBPNG_URL="ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng-1.5.13.tar.xz"
+
 # envvar ZLIB_URL
 #
 # Specifies the URL of the zlib source tarball you want to use.
@@ -48,6 +53,7 @@ echo "Building UQM dependencies"
 echo ""
 
 . /usr/src/crossbuild/crossbuild_libiconv
+. /usr/src/crossbuild/crossbuild_libpng
 . /usr/src/crossbuild/crossbuild_zlib
 . /usr/src/crossbuild/crossbuild_libogg
 . /usr/src/crossbuild/crossbuild_libvorbis
