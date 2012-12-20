@@ -8,9 +8,9 @@ echo "--- BEGIN: crossbuild_libpng ---"
 
 cd /tmp
 
-wget --output-document=/tmp/libpng.tar.zx ${LIBPNG_URL}
+wget --output-document=/tmp/libpng.tar.xz ${LIBPNG_URL}
 
-if [ -f libpng.tar.gz ]; then
+if [ -f libpng.tar.xz ]; then
 
 	if [ ! -d libpng ]; then 
 		mkdir libpng
