@@ -13,7 +13,7 @@ wget --output-document=/tmp/libpng.tar.zx ${LIBPNG_URL}
 if [ -f libpng.tar.gz ]; then
 
 	if [ ! -d libpng ]; then 
-		mkdir libpg
+		mkdir libpng
 	fi
 
 	tar -Jxf libpng.tar.xz -C libpng
