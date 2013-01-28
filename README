@@ -8,4 +8,4 @@ To build a hybrid (CD/DVD/USB stick) ISO from these files:
 2) Run 'lb config' from within this repo's root
 3) Run 'lb build' to create the ISO (must have root/fakeroot)
 
-
+Prebuilt ISOs are available at https://sourceforge.net/projects/oldlaptop.u/files/uqm-crossbuilder/
