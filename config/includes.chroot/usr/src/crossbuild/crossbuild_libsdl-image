@@ -1,4 +1,6 @@
 #! /bin/sh
+#@DEP@ libsdl
+#@DEP@ libpng
 #
 # Builds and installs libsdl_image for the cross toolchain.
 # Sourced from build-uqm-dependencies.chroot

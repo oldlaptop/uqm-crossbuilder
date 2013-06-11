@@ -1,4 +1,5 @@
 #! /bin/sh
+#@DEP@ zlib
 #
 # Builds and installs libpng for the cross toolchain.
 # Sourced from build-uqm-dependencies.chroot
