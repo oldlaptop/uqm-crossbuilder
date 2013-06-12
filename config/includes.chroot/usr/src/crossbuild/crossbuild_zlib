@@ -6,7 +6,7 @@
 # envvar ZLIB_URL
 #
 # Specifies the URL of the zlib source tarball you want to use.
-export ZLIB_URL="http://zlib.net/zlib-1.2.7.tar.gz"
+export ZLIB_URL="http://zlib.net/zlib-1.2.8.tar.gz"
 
 # zlib uses old autoconf and therefore does not know about our cross compilation
 # environment. We therefore need to let our cross toolchain override native build
