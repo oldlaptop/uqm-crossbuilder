@@ -4,6 +4,11 @@
 # Builds and installs libsdl for the cross toolchain.
 # Sourced from build-uqm-dependencies.chroot
 
+# envvar LIBSDL_URL
+#
+# Specifies the URL of the libsdl source tarball you want to use.
+export LIBSDL_URL="http://www.libsdl.org/release/SDL-1.2.15.tar.gz"
+
 echo "***********************************************************************************************"
 echo "--- BEGIN: crossbuild_libsdl ---"
 

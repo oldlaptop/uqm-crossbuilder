@@ -5,6 +5,11 @@
 # Builds and installs libsdl_image for the cross toolchain.
 # Sourced from build-uqm-dependencies.chroot
 
+# envvar LIBSDL_IMAGE_URL
+#
+# Specifies the URL of the libsdl_image source tarball you want to use.
+export LIBSDL_IMAGE_URL="http://www.libsdl.org/projects/SDL_image/release/SDL_image-1.2.12.tar.gz"
+
 # libsdl_image is an SDL package, and thus we need some extra LDFLAGS for SDL
 export SDL_LIBS="-lmingw32 -lSDLmain -lSDL"
 
