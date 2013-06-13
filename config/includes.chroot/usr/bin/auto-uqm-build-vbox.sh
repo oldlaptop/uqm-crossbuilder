@@ -16,6 +16,11 @@
 # as passed to git-clone.
 BALANCE_GIT_URL="git://github.com/Roisack/Shiver-Balance-Mod.git"
 
+# envvar: EFFECTS_PACK_NAME
+#
+# The name for our balance mod effects pack.
+EFFECTS_PACK_NAME="improved-netmelee-effects.zip"
+
 mount /vbox_share
 
 if [ `echo $@ | grep "vanilla"` ]; then
@@ -26,6 +31,8 @@ if [ `echo $@ | grep "vanilla"` ]; then
 	cp /usr/src/uqm/config.state.vanilla ./config.state
 	echo "Configuring vanilla"
 	sh cross-build.sh uqm reprocess_config
+
+	echo "Building vanilla"
 	sh cross-build.sh uqm
 
 	if [ -f *.exe ]; then
@@ -46,18 +53,24 @@ if [ `echo $@ | grep "balance"` ]; then
 	cp /usr/src/uqm/config.state.balance ./config.state
 	echo "Configuring balance"
 	sh cross-build.sh uqm reprocess_config
-	sh cross-build.sh uqm
 
-	git checkout allow-retreat
-	cp /usr/src/uqm/config.state.balance-retreat ./config.state
-	echo "Configuring balance-retreat"
-	sh cross-build.sh uqm reprocess_config
+	echo "Building balance"
 	sh cross-build.sh uqm
+	
+	echo "Building effects pack"
+	sh generate-effects-pack.sh
 
 	if [ -f *.exe ]; then
 		cp *.exe /vbox_share
 	else
 		echo "No executables found!"
+		exit 1
+	fi
+
+	if [ -f content/addons/$EFFECTS_PACK_NAME ]; then
+		cp content/addons/$EFFECTS_PACK_NAME /vbox_share
+	else
+		echo "Effects pack not found!"
 		exit 1
 	fi
 fi
