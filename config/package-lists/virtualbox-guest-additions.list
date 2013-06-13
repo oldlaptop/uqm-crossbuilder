@@ -1,6 +1,4 @@
-#if LINUX_FLAVORS 486
 linux-headers-486
-#endif
 
 dkms
 virtualbox
