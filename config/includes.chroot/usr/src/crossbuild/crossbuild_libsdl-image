@@ -38,6 +38,7 @@ if [ -f configure ]; then
 		--host=${HOST_TRIPLET}\
 		--build=i686-linux-gnu\
 		--prefix=/usr/${HOST_TRIPLET}
+		--with-sdl-prefix=/usr/${HOST_TRIPLET}
 else
 	echo "crossbuild_libsdl_image failed: Could not find ./configure (is libsdl_image source tarball sane?)"
 	exit 1

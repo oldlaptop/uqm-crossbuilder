@@ -30,7 +30,7 @@ echo "!!! DEPENDENCY RESOLVER FINISHED !!!"
 export LINES=`cat /tmp/script_list | wc -l`
 for LINE_NUMBER in `seq $LINES`
 do
-	`head /tmp/script_list -n$LINE_NUMBER | tail -n1`
+	. `head /tmp/script_list -n$LINE_NUMBER | tail -n1`
 done
 
 echo ""
