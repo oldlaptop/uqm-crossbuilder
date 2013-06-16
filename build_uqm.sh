@@ -18,7 +18,7 @@
 #
 
 SHARED_DIR="uqm-crossbuilder-share"
-IMAGE_NAME="uqm_crossbuilder.iso"
+IMAGE_NAME="uqm-crossbuilder.iso"
 CURRENT_DIR=`pwd`
 VANILLA_EXE="uqm.exe"
 BALANCE_EXE="uqm-improved-netmelee.exe"
@@ -171,7 +171,7 @@ fi
 
 echo "== Folder created on guest"
 
-vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username "user" --password "live" --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/mount" "/vbox_share"
+vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username "user" --password "live" --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/mount" "-tvboxsf" $SHARED_DIR "/vbox_share"
 if [ $? -ne 0 ]; then
     echo "!! Error at mounting shared folder on guest"
     cleanup
@@ -198,8 +198,6 @@ fi
 echo "== Shared folder works"
 
 echo "## Sending the build command to the Virtual Machine ##"
-
-exit 1
 
 if [ $BUILD_VANILLA ]; then
     vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username "user" --password "live" --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/sh" "$BUILD_SCRIPT_PATH" "vanilla"
@@ -228,7 +226,7 @@ else
 fi
 
 if [ $BUILD_VANILLA ]; then
-    if [ -f $SHARED_DIR/$VANILLA_EXE]; then
+    if [ -f $SHARED_DIR/$VANILLA_EXE ]; then
         echo "== Copying the binaries to the current directory"
         cp $SHARED_DIR/$VANILLA_EXE $CURRENT_DIR
     else
