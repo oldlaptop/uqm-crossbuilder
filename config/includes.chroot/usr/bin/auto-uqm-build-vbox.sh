@@ -23,7 +23,7 @@ EFFECTS_PACK_NAME="improved-netmelee-effects.zip"
 
 if [ `echo $@ | grep "vanilla"` ]; then
 	mkdir /tmp/uqm
-	tar -zxf /usr/src/uqm/uqm*.tgz -C /tmp/uqmI
+	tar -zxf /usr/src/uqm/uqm*.tgz -C /tmp/uqm
 	cd /tmp/uqm/uqm-0.7.0
 	cp /etc/skel/cross-build.sh .
 	cp /usr/src/uqm/config.state.vanilla ./config.state
