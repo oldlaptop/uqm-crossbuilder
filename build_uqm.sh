@@ -246,7 +246,7 @@ if [ $BUILD_BALANCE ]; then
 #         cp $SHARED_DIR/$BALANCE_RETREAT_EXE $CURRENT_DIR
 #     else
 #         echo "!! Balance Mod Retreat exe not found. Something went wrong :("
-    fi
+#    fi
     if [ -f $SHARED_DIR/$EFFECTS_PACK ]; then
         echo "== Copying the effects pack to current dir: $EFFECTS_PACK"
         cp $SHARED_DIR/$EFFECTS_PACK $CURRENT_DIR
