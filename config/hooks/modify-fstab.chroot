@@ -1,5 +1,0 @@
-#! /bin/sh
-#
-# Add the fstab entry for vbox_share
-
-echo "uqm-crossbuilder-share	/vbox_share	vboxsf	rw,noauto	0	0" >> /etc/fstab

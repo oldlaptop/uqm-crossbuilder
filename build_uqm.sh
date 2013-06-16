@@ -8,7 +8,7 @@
 #       Builds Ur-Quan Masters vanilla code
 #
 # balance:
-#       Builds Shiver's Balance Mod code with the retreat mod
+#       Builds Shiver's Balance Mod code
 #
 #
 #
@@ -18,12 +18,12 @@
 #
 
 SHARED_DIR="uqm-crossbuilder-share"
-IMAGE_NAME="uqm_crossbuilder.iso"
+IMAGE_NAME="uqm-crossbuilder.iso"
 CURRENT_DIR=`pwd`
 VANILLA_EXE="uqm.exe"
-BALANCE_EXE="uqm-balance.exe"
-BALANCE_RETREAT_EXE="uqm-balance-retreat.exe"
-EFFECTS_PACK="balance-effects-unified.zip"
+BALANCE_EXE="uqm-improved-netmelee.exe"
+#BALANCE_RETREAT_EXE="uqm-balance-retreat.exe"
+EFFECTS_PACK="improved-netmelee-effects.zip"
 BUILD_VANILLA=false
 BUILD_BMOD=false
 BUILD_SCRIPT_PATH="/usr/bin/auto-uqm-build-vbox.sh"
@@ -171,7 +171,7 @@ fi
 
 echo "== Folder created on guest"
 
-vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username "user" --password "live" --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/mount" "/vbox_share"
+vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username "user" --password "live" --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/mount" "-tvboxsf" $SHARED_DIR "/vbox_share"
 if [ $? -ne 0 ]; then
     echo "!! Error at mounting shared folder on guest"
     cleanup
@@ -198,8 +198,6 @@ fi
 echo "== Shared folder works"
 
 echo "## Sending the build command to the Virtual Machine ##"
-
-exit 1
 
 if [ $BUILD_VANILLA ]; then
     vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username "user" --password "live" --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/sh" "$BUILD_SCRIPT_PATH" "vanilla"
@@ -228,7 +226,7 @@ else
 fi
 
 if [ $BUILD_VANILLA ]; then
-    if [ -f $SHARED_DIR/$VANILLA_EXE]; then
+    if [ -f $SHARED_DIR/$VANILLA_EXE ]; then
         echo "== Copying the binaries to the current directory"
         cp $SHARED_DIR/$VANILLA_EXE $CURRENT_DIR
     else
@@ -236,19 +234,19 @@ if [ $BUILD_VANILLA ]; then
     fi
 fi
 
-if [ $BUILD_BALANCE ]; then
+if [ $BUILD_BMOD ]; then
     if [ -f $SHARED_DIR/$BALANCE_EXE ]; then
         echo "== Copying the Balance Mod exe to current dir: $BALANCE_EXE"
         cp $SHARED_DIR/$BALANCE_EXE $CURRENT_DIR
     else
         echo "!! Balance Mod exe not found. Something went wrong :("
     fi
-    if [ -f $SHARED_DIR/$BALANCE_RETREAT_EXE ]; then
-        echo "== Copying the balance mod retreat exe to the current dir: $BALANCE_RETREAT_EXE"
-        cp $SHARED_DIR/$BALANCE_RETREAT_EXE $CURRENT_DIR
-    else
-        echo "!! Balance Mod Retreat exe not found. Something went wrong :("
-    fi
+#     if [ -f $SHARED_DIR/$BALANCE_RETREAT_EXE ]; then
+#         echo "== Copying the balance mod retreat exe to the current dir: $BALANCE_RETREAT_EXE"
+#         cp $SHARED_DIR/$BALANCE_RETREAT_EXE $CURRENT_DIR
+#     else
+#         echo "!! Balance Mod Retreat exe not found. Something went wrong :("
+#    fi
     if [ -f $SHARED_DIR/$EFFECTS_PACK ]; then
         echo "== Copying the effects pack to current dir: $EFFECTS_PACK"
         cp $SHARED_DIR/$EFFECTS_PACK $CURRENT_DIR

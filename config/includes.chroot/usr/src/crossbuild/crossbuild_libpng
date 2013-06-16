@@ -1,7 +1,13 @@
 #! /bin/sh
+#@DEP@ zlib
 #
 # Builds and installs libpng for the cross toolchain.
 # Sourced from build-uqm-dependencies.chroot
+
+# envvar LIBPNG_URL
+#
+# Specifies the URL of the libpng source tarball you want to use.
+export LIBPNG_URL="ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpng-1.6.2.tar.xz"
 
 echo "***********************************************************************************************"
 echo "--- BEGIN: crossbuild_libpng ---"

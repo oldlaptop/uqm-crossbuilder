@@ -1,3 +1,4 @@
+python3
 pkg-config
 ssh
 git
@@ -7,5 +8,9 @@ zip
 unzip
 links2
 less
+file
+openssh-blacklist
+openssh-blacklist-extra
+sudo
 
 

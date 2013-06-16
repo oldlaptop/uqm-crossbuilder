@@ -7,6 +7,8 @@
 # URL of the desired UQM source tarball.
 export UQM_URL="http://downloads.sourceforge.net/project/sc2/UQM/0.7/uqm-0.7.0-source.tgz"
 
+echo "Getting UQM source tarball"
+
 cd /etc/skel
 wget ${UQM_URL}
 install uqm*.tgz /usr/src/uqm/
