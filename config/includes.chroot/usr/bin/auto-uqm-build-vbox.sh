@@ -21,16 +21,16 @@ BALANCE_GIT_URL="git://github.com/Roisack/Shiver-Balance-Mod.git"
 # The name for our balance mod effects pack.
 EFFECTS_PACK_NAME="improved-netmelee-effects.zip"
 
-mount /vbox_share
-
 if [ `echo $@ | grep "vanilla"` ]; then
 	mkdir /tmp/uqm
-	tar -zxf /usr/src/uqm/uqm*.tgz -C /tmp/uqm
+	tar -zxf /usr/src/uqm/uqm*.tgz -C /tmp/uqmI
 	cd /tmp/uqm/uqm-0.7.0
 	cp /etc/skel/cross-build.sh .
 	cp /usr/src/uqm/config.state.vanilla ./config.state
 	echo "Configuring vanilla"
-	sh cross-build.sh uqm reprocess_config
+	# TODO: Find some way of doing this that isn't a horrible, horrible hack.
+	yes '
+	' | sh cross-build.sh uqm config
 
 	echo "Building vanilla"
 	sh cross-build.sh uqm
@@ -52,7 +52,9 @@ if [ `echo $@ | grep "balance"` ]; then
 	git checkout master
 	cp /usr/src/uqm/config.state.balance ./config.state
 	echo "Configuring balance"
-	sh cross-build.sh uqm reprocess_config
+	# TODO: Find some way of doing this that isn't a horrible, horrible hack.
+	yes '
+	' | sh cross-build.sh uqm config
 
 	echo "Building balance"
 	sh cross-build.sh uqm
