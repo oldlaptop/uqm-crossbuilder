@@ -234,7 +234,7 @@ if [ $BUILD_VANILLA ]; then
     fi
 fi
 
-if [ $BUILD_BALANCE ]; then
+if [ $BUILD_BMOD ]; then
     if [ -f $SHARED_DIR/$BALANCE_EXE ]; then
         echo "== Copying the Balance Mod exe to current dir: $BALANCE_EXE"
         cp $SHARED_DIR/$BALANCE_EXE $CURRENT_DIR
