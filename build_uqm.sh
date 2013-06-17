@@ -30,6 +30,8 @@ BUILD_SCRIPT_PATH="/usr/bin/auto-uqm-build-vbox.sh"
 USEOLDSYNTAX=false	# Old VirtualBox installations use --wait-for stdout instead of wait-stdout, along with other differences
 WAITSTDOUT="--wait-stdout"
 WAITSTDERR="--wait-stderr"
+NET_IFACE_TYPE="nat"
+HOST_IFACE="eth0"
 
 cleanup ()
 {
@@ -114,6 +116,12 @@ if [ $? -ne 0 ]; then
     vboxmanage unregistervm "UQM_crossbuilder_001" -delete
     rm ./testhd*
     exit 5
+fi
+
+# Set up a virtual NIC
+vboxmanage modifyvm "UQM_crossbuilder_001" --nic1 $NET_IFACE_TYPE
+if [ $NET_IFACE_TYPE = "bridged" ]; then
+    vboxmanage modifyvm "UQM_crossbuilder_001" --bridgeadapter1 $HOST_IFACE
 fi
 
 echo "== Giving the live image to the Virtual Machine: $IMAGE_NAME"
