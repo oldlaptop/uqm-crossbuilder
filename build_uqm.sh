@@ -24,8 +24,8 @@ VANILLA_EXE="uqm.exe"
 BALANCE_EXE="uqm-improved-netmelee.exe"
 #BALANCE_RETREAT_EXE="uqm-balance-retreat.exe"
 EFFECTS_PACK="improved-netmelee-effects.zip"
-BUILD_VANILLA=false
-BUILD_BMOD=false
+BUILD_VANILLA="false"
+BUILD_BMOD="false"
 BUILD_SCRIPT_PATH="/usr/bin/auto-uqm-build-vbox.sh"
 USEOLDSYNTAX=false	# Old VirtualBox installations use --wait-for stdout instead of wait-stdout, along with other differences
 WAITSTDOUT="--wait-stdout"
@@ -51,9 +51,9 @@ if [ `echo $@ | grep "clean"` ]; then
 fi
 
 if [ `echo $@ | grep "vanilla"` ]; then
-    $BUILD_VANILLA = true
+    export BUILD_VANILLA="true"
 elif [ `echo $@ | grep "balance"` ]; then
-    $BUILD_BMOD = true
+    export BUILD_BMOD="true"
 else
     echo "!! You must specify build target: either vanilla or balance"
     exit 1
@@ -207,7 +207,7 @@ echo "== Shared folder works"
 
 echo "## Sending the build command to the Virtual Machine ##"
 
-if [ $BUILD_VANILLA ]; then
+if [ $BUILD_VANILLA = "true" ]; then
     vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username "user" --password "live" --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/sh" "$BUILD_SCRIPT_PATH" "vanilla"
     if [ $? -ne 0 ]; then
         echo "!! VirtualBox returned an error while sending the build command, canceling"
@@ -217,7 +217,9 @@ if [ $BUILD_VANILLA ]; then
         echo "== All good"
         cleanup
     fi
-elif [ $BUILD_BMOD ]; then
+fi
+
+if [ $BUILD_BMOD = "true" ]; then
     vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username "user" --password "live" --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/sh" "$BUILD_SCRIPT_PATH" "balance"
     if [ $? -ne 0 ]; then
         echo "!! VirtualBox returned an error while sending the build command, canceling"
@@ -227,13 +229,9 @@ elif [ $BUILD_BMOD ]; then
         echo "== All good"
         cleanup
     fi
-else
-    echo "!! Wait, you didn't specify which version of the game you want to build. This is either vanilla or balance"
-    cleanup
-    exit 7
 fi
 
-if [ $BUILD_VANILLA ]; then
+if [ $BUILD_VANILLA = "true" ]; then
     if [ -f $SHARED_DIR/$VANILLA_EXE ]; then
         echo "== Copying the binaries to the current directory"
         cp $SHARED_DIR/$VANILLA_EXE $CURRENT_DIR
@@ -242,7 +240,7 @@ if [ $BUILD_VANILLA ]; then
     fi
 fi
 
-if [ $BUILD_BMOD ]; then
+if [ $BUILD_BMOD = "true" ]; then
     if [ -f $SHARED_DIR/$BALANCE_EXE ]; then
         echo "== Copying the Balance Mod exe to current dir: $BALANCE_EXE"
         cp $SHARED_DIR/$BALANCE_EXE $CURRENT_DIR
