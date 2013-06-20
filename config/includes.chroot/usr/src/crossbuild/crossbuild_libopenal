@@ -1,0 +1,56 @@
+#! /bin/sh
+#
+# Builds and installs libopenal for the cross toolchain.
+
+# envvar LIBOPENAL_URL
+#
+# Specifies the URL of the libopenal tarball you want to use.
+export LIBOPENAL_URL="http://kcat.strangesoft.net/openal-releases/openal-soft-1.15.1.tar.bz2"
+
+echo "***********************************************************************************************"
+echo "--- BEGIN: crossbuild_openal ---"
+
+cd /tmp
+
+wget --output-document=/tmp/libopenal.tar.bz2 ${LIBOPENAL_URL}
+
+if [ -f libopenal.tar.bz2 ]; then
+
+	if [ ! -d libopenal ]; then 
+		mkdir libopenal
+	fi
+
+	tar -jxf libopenal.tar.xz -C libopenal
+	cd libopenal/openal*
+else
+	echo "crossbuild_libopenal failed: Could not get/extract libopenal source"
+	exit 1
+fi
+
+if [ -f CMakeLists.txt ]; then
+	if [ ! -d build ]; then
+		mkdir build
+	fi
+
+	cd build
+	cmake\
+		-DCMAKE_TOOLCHAIN_FILE=/usr/src/crossbuild/i686-w64-mingw32.toolchain.cmake\
+		..
+else
+	echo "crossbuild_libopenal failed: Could not find CMakeLists.txt"
+	echo "(is libopenal source tarball sane?)"
+	exit 1
+fi
+
+if [ -f Makefile ]; then
+	make clean
+	make
+	make install
+else
+	echo "crossbuild_libopenal failed: Could not find Makefile"
+	echo "(did cmake fail?)"
+	exit 1
+fi
+
+echo "--- END: crossbuild_libopenal ---"
+echo "***********************************************************************************************"
