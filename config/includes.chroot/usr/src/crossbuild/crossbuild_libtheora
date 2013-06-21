@@ -14,7 +14,7 @@ echo "--- BEGIN: crossbuild_libtheora ---"
 
 cd /tmp
 
-wget --output-document=/tmp/libtheora.tar.gz ${LIBVORBIS_URL}
+wget --output-document=/tmp/libtheora.tar.gz ${LIBTHEORA_URL}
 
 if [ -f libtheora.tar.gz ]; then
 
