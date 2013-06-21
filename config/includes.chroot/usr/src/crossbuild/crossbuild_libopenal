@@ -20,7 +20,7 @@ if [ -f libopenal.tar.bz2 ]; then
 		mkdir libopenal
 	fi
 
-	tar -jxf libopenal.tar.xz -C libopenal
+	tar -jxf libopenal.tar.bz2 -C libopenal
 	cd libopenal/openal*
 else
 	echo "crossbuild_libopenal failed: Could not get/extract libopenal source"
