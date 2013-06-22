@@ -22,7 +22,7 @@ if [ -f libjpeg.tar.gz ]; then
 	fi
 
 	tar -zxf libjpeg.tar.gz -C libjpeg
-	cd libjpeg/libjpeg*
+	cd libjpeg/jpeg*
 else
 	echo "crossbuild_libjpeg failed: Could not get/extract libjpeg source"
 	exit 1
