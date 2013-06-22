@@ -1,5 +1,8 @@
 build-essential
 cmake
+autoconf
+automake
+
 mingw-w64-i686-dev
 binutils-mingw-w64-i686
 gcc-mingw-w64-base
