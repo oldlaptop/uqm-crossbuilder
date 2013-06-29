@@ -14,16 +14,17 @@
 # in base-cross-toolchain.list.
 export HOST_TRIPLET="i686-w64-mingw32"
 
-echo "Building UQM dependencies"
+echo "Crossbuilding build depenencies"
 echo ""
 
-echo "!!! RUNNING DEPENDENCY RESOLVER !!!"
+echo "Resolving dependencies..."
 echo ""
-
 /usr/src/crossbuild/depengine.py libsdl libsdl-image libogg libvorbis zlib > /tmp/script_list
 
-echo ""
-echo "!!! DEPENDENCY RESOLVER FINISHED !!!"
+if [ ! -f /tmp/script_list ] then;
+	echo "/tmp/script_list not found - dependency resolution failed"
+	exit 1
+fi
 
 # We now iterate over the lines in the output file from our dependency resolver, sourcing each
 # script listed in order.
