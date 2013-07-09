@@ -1,0 +1,56 @@
+#! /bin/sh
+#
+# Builds and installs libglfw for the cross toolchain.
+
+# envvar LIBGLFW_URL
+#
+# Specifies the URL of the libglfw tarball you want to use.
+export LIBGLFW_URL="http://downloads.sourceforge.net/project/glfw/glfw/3.0.1/glfw-3.0.1.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fglfw%2F&ts=1373404138&use_mirror=iweb"
+
+echo "***********************************************************************************************"
+echo "--- BEGIN: crossbuild_libglfw ---"
+
+cd /tmp
+
+wget --output-document=/tmp/libglfw.tar.bz2 ${LIBGLFW_URL}
+
+if [ -f libglfw.tar.bz2 ]; then
+
+	if [ ! -d libglfw ]; then 
+		mkdir libglfw
+	fi
+
+	tar -jxf libglfw.tar.bz2 -C libglfw
+	cd libglfw/glfw*
+else
+	echo "crossbuild_libglfw failed: Could not get/extract libglfw source"
+	exit 1
+fi
+
+if [ -f CMakeLists.txt ]; then
+	if [ ! -d build ]; then
+		mkdir build
+	fi
+
+	cd build
+	cmake\
+		-DCMAKE_TOOLCHAIN_FILE=/usr/src/crossbuild/i686-w64-mingw32.toolchain.cmake\
+		..
+else
+	echo "crossbuild_libglfw failed: Could not find CMakeLists.txt"
+	echo "(is libglfw source tarball sane?)"
+	exit 1
+fi
+
+if [ -f Makefile ]; then
+	make clean
+	make
+	make install
+else
+	echo "crossbuild_libglfw failed: Could not find Makefile"
+	echo "(did cmake fail?)"
+	exit 1
+fi
+
+echo "--- END: crossbuild_libglfw ---"
+echo "***********************************************************************************************"
