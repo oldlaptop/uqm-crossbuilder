@@ -21,7 +21,7 @@ echo "Resolving dependencies..."
 echo ""
 /usr/src/crossbuild/depengine.py libsdl libsdl-image libogg libvorbis zlib > /tmp/script_list
 
-if [ ! -f /tmp/script_list ] then;
+if [ ! -f /tmp/script_list ]; then
 	echo "/tmp/script_list not found - dependency resolution failed"
 	exit 1
 fi
