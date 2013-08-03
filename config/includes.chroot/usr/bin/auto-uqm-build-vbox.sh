@@ -52,6 +52,14 @@ if [ `echo $@ | grep "balance"` ]; then
 	git checkout master
 	cp /usr/src/uqm/config.state.balance ./config.state
 	echo "Configuring balance"
+
+	# Make sure embedded icons are set up
+
+	# TODO: make this more robust
+	sed -i 's/.o)/.o) uqm.res/' Makefile.build
+
+	i686-w64-mingw32-windres src/res/UrQuanMasters.rc -O coff -o uqm.res
+
 	# TODO: Find some way of doing this that isn't a horrible, horrible hack.
 	yes '
 	' | sh cross-build.sh uqm config
