@@ -9,7 +9,7 @@
 # Specifies the URL of the libvorbis source tarball you want to use.
 export LIBVORBIS_URL="http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.3.tar.gz"
 
-echo "***********************************************************************************************"
+echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libvorbis ---"
 
 cd /tmp
@@ -50,4 +50,4 @@ else
 fi
 
 echo "--- END: crossbuild_libvorbis ---"
-echo "***********************************************************************************************"
+echo "*************************************************************************"

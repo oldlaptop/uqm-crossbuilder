@@ -7,7 +7,7 @@
 # Specifies the URL of the libglfw tarball you want to use.
 export LIBGLFW_URL="http://downloads.sourceforge.net/project/glfw/glfw/3.0.1/glfw-3.0.1.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fglfw%2F&ts=1373404138&use_mirror=iweb"
 
-echo "***********************************************************************************************"
+echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libglfw ---"
 
 cd /tmp
@@ -53,4 +53,4 @@ else
 fi
 
 echo "--- END: crossbuild_libglfw ---"
-echo "***********************************************************************************************"
+echo "********************************************************************************"

@@ -7,7 +7,7 @@
 # Specifies the URL of the libopenal tarball you want to use.
 export LIBOPENAL_URL="http://kcat.strangesoft.net/openal-releases/openal-soft-1.15.1.tar.bz2"
 
-echo "***********************************************************************************************"
+echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_openal ---"
 
 cd /tmp
@@ -53,4 +53,4 @@ else
 fi
 
 echo "--- END: crossbuild_libopenal ---"
-echo "***********************************************************************************************"
+echo "*************************************************************************"

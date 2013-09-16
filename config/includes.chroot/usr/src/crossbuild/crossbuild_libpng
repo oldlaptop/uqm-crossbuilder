@@ -9,7 +9,7 @@
 # Specifies the URL of the libpng source tarball you want to use.
 export LIBPNG_URL="ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpng-1.6.3.tar.xz"
 
-echo "***********************************************************************************************"
+echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libpng ---"
 
 cd /tmp
@@ -49,4 +49,4 @@ else
 fi
 
 echo "--- END: crossbuild_libpng ---"
-echo "***********************************************************************************************"
+echo "*************************************************************************"

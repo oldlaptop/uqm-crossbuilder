@@ -9,7 +9,7 @@
 # Specifies the URL of the libtheora source tarball you want to use.
 export LIBTHEORA_URL="http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.gz"
 
-echo "***********************************************************************************************"
+echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libtheora ---"
 
 cd /tmp
@@ -50,4 +50,4 @@ else
 fi
 
 echo "--- END: crossbuild_libtheora ---"
-echo "***********************************************************************************************"
+echo "*************************************************************************"

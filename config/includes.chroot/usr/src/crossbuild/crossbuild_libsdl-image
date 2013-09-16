@@ -13,7 +13,7 @@ export LIBSDL_IMAGE_URL="http://www.libsdl.org/projects/SDL_image/release/SDL_im
 # libsdl_image is an SDL package, and thus we need some extra LDFLAGS for SDL
 export SDL_LIBS="-lmingw32 -lSDLmain -lSDL"
 
-echo "***********************************************************************************************"
+echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libsdl_image ---"
 
 cd /tmp
@@ -54,4 +54,4 @@ else
 fi
 
 echo "--- END: crossbuild_libsdl_image ---"
-echo "***********************************************************************************************"
+echo "*************************************************************************"
