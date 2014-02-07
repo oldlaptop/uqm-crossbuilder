@@ -7,7 +7,7 @@
 # envvar LIBPNG_URL
 #
 # Specifies the URL of the libpng source tarball you want to use.
-export LIBPNG_URL="ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpng-1.6.6.tar.xz"
+export LIBPNG_URL="ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpng-1.6.9.tar.xz"
 
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libpng ---"
