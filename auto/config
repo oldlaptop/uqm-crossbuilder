@@ -12,5 +12,5 @@ lb config noauto \
 	--architecture i386\
 	--mirror-bootstrap ${DEBIAN_MIRROR}\
 	--mirror-binary ${DEBIAN_MIRROR}\
-	--bootappend-live "--hostname=uqm-crossbuilder"\
+	--bootappend-live "boot=live config hostname=uqm-crossbuilder username=fwiffo"\
 	"${@}"
