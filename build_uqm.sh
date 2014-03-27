@@ -172,7 +172,7 @@ echo "##################################################"
 sleep 30
 
 echo "## Mounting shared folder ##"
-vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username $LIVE_USER --password LIVE_PASSWORD --verbose $WAITSTDOUT $WAITSTDERR "/bin/mkdir" "/vbox_share"
+vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username $LIVE_USER --password $LIVE_PASSWORD --verbose $WAITSTDOUT $WAITSTDERR "/bin/mkdir" "/vbox_share"
 if [ $? -ne 0 ]; then
     echo "!! Error at creating shared folder on guest"
     cleanup
@@ -181,7 +181,7 @@ fi
 
 echo "== Folder created on guest"
 
-vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username $LIVE_USER --password LIVE_PASSWORD --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/mount" "-tvboxsf" $SHARED_DIR "/vbox_share"
+vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username $LIVE_USER --password $LIVE_PASSWORD --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/mount" "-tvboxsf" $SHARED_DIR "/vbox_share"
 if [ $? -ne 0 ]; then
     echo "!! Error at mounting shared folder on guest"
     cleanup
@@ -191,7 +191,7 @@ fi
 echo "== Shared folder mounted successfully"
 
 echo "== Testing shared folder"
-vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username $LIVE_USER --password LIVE_PASSWORD --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/touch" "/vbox_share/touched_file"
+vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username $LIVE_USER --password $LIVE_PASSWORD --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/touch" "/vbox_share/touched_file"
 if [ $? -ne 0 ]; then
 	echo "!! Error at testing shared directory. This is probably an error with your VirtualBox version"
 	cleanup
@@ -210,7 +210,7 @@ echo "== Shared folder works"
 echo "## Sending the build command to the Virtual Machine ##"
 
 if [ $BUILD_VANILLA = "true" ]; then
-    vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username $LIVE_USER --password LIVE_PASSWORD --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/sh" "$BUILD_SCRIPT_PATH" "vanilla"
+    vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username $LIVE_USER --password $LIVE_PASSWORD --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/sh" "$BUILD_SCRIPT_PATH" "vanilla"
     if [ $? -ne 0 ]; then
         echo "!! VirtualBox returned an error while sending the build command, canceling"
         cleanup
@@ -222,7 +222,7 @@ if [ $BUILD_VANILLA = "true" ]; then
 fi
 
 if [ $BUILD_BMOD = "true" ]; then
-    vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username $LIVE_USER --password LIVE_PASSWORD --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/sh" "$BUILD_SCRIPT_PATH" "balance"
+    vboxmanage guestcontrol "UQM_crossbuilder_001" execute "/usr/bin/sudo" --username $LIVE_USER --password $LIVE_PASSWORD --verbose $WAITSTDOUT $WAITSTDERR -- "/bin/sh" "$BUILD_SCRIPT_PATH" "balance"
     if [ $? -ne 0 ]; then
         echo "!! VirtualBox returned an error while sending the build command, canceling"
         cleanup
