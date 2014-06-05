@@ -34,7 +34,8 @@ if [ -f CMakeLists.txt ]; then
 
 	cd build
 	cmake\
-		-DCMAKE_TOOLCHAIN_FILE=/usr/src/crossbuild/i686-w64-mingw32.toolchain.cmake\
+		-DCMAKE_TOOLCHAIN_FILE=/usr/src/crossbuild/${HOST_TRIPLET}.toolchain.cmake\
+		-DCMAKE_INSTALL_PREFIX=/usr/${HOST_TRIPLET}/
 		..
 else
 	echo "crossbuild_libglfw failed: Could not find CMakeLists.txt"
