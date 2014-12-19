@@ -20,6 +20,24 @@ export HOST_TRIPLET="i686-w64-mingw32"
 # and built.
 export SRC_ROOT_DIR="/usr/src/crossbuilt"
 
+echo "Building /bin directory for the cross toolchain"
+echo ""
+
+# Get a list of all our cross-tools in /usr/bin
+find /usr/bin | grep ${HOST_TRIPLET} > /tmp/prefixed-tools
+
+# Make symlinks for all of them under /usr/${HOST_PREFIX}, stripping prefixes
+LINES=$(cat /tmp/prefixed-tools | wc -l)
+for LINE_NUMBER in $(seq ${LINES})
+do
+	TARGET=$(head /tmp/prefixed-tools -n${LINE_NUMBER} | tail -n1)
+
+	# Replace the first component of the path, also clobbering the prefix
+	LINK=$(echo ${TARGET} | sed "s|/usr/bin/i686-w64-mingw32-|/usr/${HOST_TRIPLET}/bin/|")
+
+	ln -s ${TARGET} ${LINK}
+done
+
 echo "Crossbuilding build depenencies"
 echo ""
 
@@ -27,14 +45,15 @@ echo "Resolving dependencies..."
 echo ""
 /usr/lib/crossbuild/depengine.py libsdl libsdl-image libogg libvorbis zlib > /tmp/script_list
 
-if [ ! -f /tmp/script_list ]; then
+if [ ! -f /tmp/script_list ]
+then
 	echo "/tmp/script_list not found - dependency resolution failed"
 	exit 1
 fi
 
 # We now iterate over the lines in the output file from our dependency resolver, sourcing each
 # script listed in order.
-export LINES=$(cat /tmp/script_list | wc -l)
+LINES=$(cat /tmp/script_list | wc -l)
 for LINE_NUMBER in $(seq ${LINES})
 do
 	. $(head /tmp/script_list -n${LINE_NUMBER} | tail -n1)
