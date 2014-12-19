@@ -1,0 +1,20 @@
+#! /bin/sh
+#
+# Builds and installs libiconv for the cross toolchain.
+# Sourced from build-uqm-dependencies.chroot
+
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
+# envvar LIBICONV_URL
+#
+# Specifies the URL of the libiconv source tarball you want to use.
+export LIBICONV_URL="ftp://psg.mtu.edu/pub/gnu/libiconv/libiconv-1.14.tar.gz"
+
+echo "*************************************************************************"
+echo "--- BEGIN: crossbuild_libiconv ---"
+
+basic_autotools_lib libiconv ${LIBICONV_URL} gz ""
+
+echo "--- END: crossbuild_libiconv ---"
+echo "*************************************************************************"

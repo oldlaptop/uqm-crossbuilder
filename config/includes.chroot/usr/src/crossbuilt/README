@@ -1,0 +1,6 @@
+The sources in this directory were downloaded, unpacked, cross-compiled, and
+installed under /usr/i686-w64-mingw32 during the process of preparing this live
+image, and are included here for reference. If you wish to compile and install
+these sources with different build flags, or with your own modifications, your
+best bet is to generate a new live image; please contact oldlaptop on Freenode
+for assistance.

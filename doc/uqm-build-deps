@@ -11,3 +11,9 @@ The process for automatically crossbuilding libraries now has three steps:
  * Finally, we abuse head/tail and backtick substitution to run each build
    script specified in the temporary file. These build scripts each download,
    build, and install one library.
+
+The build scripts themselves are modularized; there are two generic functions
+(basic_autotools_lib and basic_cmake_lib) which can build most normal libraries
+using autohell and cmake, respectively, and a number of sub-functions which are
+used in these generic functions and directly in build scripts for... special
+libraries. See crossbuild.subr for details.

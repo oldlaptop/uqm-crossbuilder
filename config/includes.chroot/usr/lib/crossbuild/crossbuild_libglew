@@ -3,6 +3,9 @@
 # Builds and installs libglew for the cross toolchain.
 # Sourced from build-uqm-dependencies.chroot
 
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
 # envvar LIBGLEW_URL
 #
 # Specifies the URL of the libglew source tarball you want to use.
@@ -24,29 +27,17 @@ export PATH="/usr/${HOST_TRIPLET}/bin:${PATH}"
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libglew ---"
 
-cd /tmp
-
-wget --output-document=/tmp/libglew.tar.gz ${LIBGLEW_URL}
-
-if [ -f libglew.tar.gz ]; then
-
-	if [ ! -d libglew ]; then 
-		mkdir libglew
-	fi
-
-	tar -zxf libglew.tar.gz -C libglew
-	cd libglew/glew*
-else
+get_tarball libglew ${LIBGLEW_URL} gz
+if [ ${?} -eq 10 ]
+then
 	echo "crossbuild_libglew failed: Could not get/extract libglew source"
 	exit 1
 fi
 
-if [ -f Makefile ]; then
-	# make -e to allow our environment to override the broken makefiles
-
-	make -e
-	make -e install
-else
+# make -e to use our environment instead
+makefile_build ${SRC_ROOT_DIR}libglew/* "-e"
+if [ ${?} -eq 20 ]
+then
 	echo "crossbuild_libglew failed: Could not find Makefile (is the libglew source tarball sane?)"
 	exit 1
 fi

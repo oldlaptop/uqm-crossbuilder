@@ -3,6 +3,9 @@
 # Builds and installs liblua5.1 for the cross toolchain.
 # Sourced from build-uqm-dependencies.chroot
 
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
 # envvar LIBLUA51_URL
 #
 # Specifies the URL of the liblua5.1 source tarball you want to use.
@@ -35,22 +38,9 @@ export PATH=/usr/${HOST_TRIPLET}/bin:${PATH}
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_liblua5.1 ---"
 
-cd /tmp
+get_tarball "liblua5.1" ${LIBLUA51_URL} gz
 
-wget --output-document=/tmp/liblua5.1.tar.gz ${LIBLUA51_URL}
-
-if [ -f liblua5.1.tar.gz ]; then
-
-	if [ ! -d liblua5.1 ]; then 
-		mkdir liblua5.1
-	fi
-
-	tar -zxf liblua5.1.tar.gz -C liblua5.1
-	cd liblua5.1/lua-5.1*
-else
-	echo "crossbuild_liblua5.1 failed: Could not get/extract liblua5.1 source"
-	exit 1
-fi
+cd ${SRC_ROOT_DIR}/liblua5.1/*
 
 if [ -f Makefile ]; then
 	make clean

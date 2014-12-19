@@ -1,0 +1,21 @@
+#! /bin/sh
+#@DEP@ libogg
+#
+# Builds and installs libtheora for the cross toolchain.
+# Sourced from build-uqm-dependencies.chroot
+
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
+# envvar LIBTHEORA_URL
+#
+# Specifies the URL of the libtheora source tarball you want to use.
+export LIBTHEORA_URL="http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.gz"
+
+echo "*************************************************************************"
+echo "--- BEGIN: crossbuild_libtheora ---"
+
+basic_autotools_lib libtheora ${LIBTHEORA_URL} gz ""
+
+echo "--- END: crossbuild_libtheora ---"
+echo "*************************************************************************"

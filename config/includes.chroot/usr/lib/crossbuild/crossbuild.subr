@@ -1,0 +1,254 @@
+#! /bin/sh
+
+# Common subroutines for our various build scripts.
+
+# func get_tarball
+#
+#	parameter 1: library name
+#	parameter 2: tarball url
+#	parameter 3: compression type (null for none)
+#
+# Downloads and unpacks a source tarball to the proper directory.
+# Returns 10 if the tarball cannot be properly unpacked, 0 otherwise.
+get_tarball ()
+{
+	LIBNAME=${1}
+	TARBALL_URL=${2}
+	TARBALL_COMPRESSION=${3}
+
+	case ${TARBALL_COMPRESSION} in
+		gz)
+			COMPRESSION_FLAG="z"
+			;;
+		bz2)
+			COMPRESSION_FLAG="j"
+			;;
+		xz)
+			COMPRESSION_FLAG="J"
+			;;
+		*)
+			COMPRESSION_FLAG=""
+			;;
+	esac
+
+	TARFLAGS="-${COMPRESSION_FLAG}xf"
+
+	TARBALL_NAME="${LIBNAME}.tar.${TARBALL_COMPRESSION}"
+
+	cd ${SRC_ROOT_DIR}
+
+	wget --output-document="${SRC_ROOT_DIR}/${TARBALL_NAME}" "${TARBALL_URL}"
+
+	if [ -f ${TARBALL_NAME} ]
+	then
+
+		if [ ! -d ${LIBNAME} ]
+		then
+			mkdir ${LIBNAME}
+		fi
+
+		tar ${TARFLAGS} ${TARBALL_NAME} -C ${LIBNAME}
+		return 0
+	else
+		return 10
+	fi
+}
+
+# func get_zipball
+#
+#	parameter 1: library name
+#	parameter 2: zipball url
+#
+# Downloads and unzips a zip archive to the proper directory.
+# Returns 10 if the zipball cannot be properly unpacked, 0 otherwise.
+get_zipball ()
+{
+	LIBNAME=${1}
+	ZIPBALL_URL=${2}
+
+	ZIPBALL_NAME="${LIBNAME}.zip"
+
+	cd ${SRC_ROOT_DIR}
+
+	wget --output-document="${SRC_ROOT_DIR}/${ZIPBALL_NAME}" "${ZIPBALL_URL}"
+
+	if [ -f ${ZIPBALL_NAME} ]
+	then
+
+		if [ ! -d ${LIBNAME} ]
+		then 
+			mkdir ${LIBNAME}
+		fi
+
+		unzip ${ZIPBALL_NAME} -d ${LIBNAME}
+		return 0
+	else
+		return 10
+	fi
+}
+
+# func makefile_build
+#
+#	parameter 1: directory containing the Makefile
+#	parameter 2: flags for make
+#
+# Builds a library using a makefile in the supplied directory; used by cmake
+# and automake build functions, as well as for some bare makefile packages.
+makefile_build ()
+{
+	MAKE_DIR=${1}
+	MAKE_FLAGS=${2}
+
+	cd ${MAKE_DIR}
+
+	if [ -f Makefile ]; then
+		make ${MAKE_FLAGS} clean
+		make ${MAKE_FLAGS}
+		make ${MAKE_FLAGS} install
+	else
+		return 20
+	fi
+}
+
+# func cmake_build
+#
+#	parameter 1: directory containing CMakeLists.txt
+#	parameter 2: extra cmake flags
+#
+# Builds a cmake-using library in the directory given as parameter 1. Returns 10
+# if a CMakeLists.txt file does not exist, 20 if cmake fails to produce a
+# makefile.
+cmake_build ()
+{
+	CMAKELISTS_DIR=${1}
+	CMAKE_FLAGS="${2}"
+
+	cd ${CMAKELISTS_DIR}
+
+	if [ -f CMakeLists.txt ]
+	then
+		if [ ! -d build ]
+		then
+			mkdir build
+		fi
+
+		cd build
+		cmake\
+			-DCMAKE_TOOLCHAIN_FILE=/usr/lib/crossbuild/${HOST_TRIPLET}.toolchain.cmake\
+			-DCMAKE_INSTALL_PREFIX=/usr/${HOST_TRIPLET}\
+			${CMAKE_FLAGS}\
+			..
+
+		makefile_build . ""
+		return ${?}
+	else
+		return 10
+	fi
+}
+
+# func autotools_build
+#
+#	parameter 1: directory containing the configure script
+#	parameter 2: extra configure flags
+#
+# Builds an autohell-using library in the directory given as parameter 1.
+# Returns 10 if the configure script does not exist, 20 if it fails to produce
+# a makefile.
+autotools_build ()
+{
+	CONFIGURE_DIR=${1}
+	CONFIGURE_FLAGS=${2}
+
+	cd ${CONFIGURE_DIR}
+
+	if [ -f configure ]; then
+		./configure\
+			--host=${HOST_TRIPLET}\
+			--build=i686-linux-gnu\
+			--prefix=/usr/${HOST_TRIPLET}\
+			${CONFIGURE_FLAGS}
+
+		makefile_build . ""
+		return ${?}
+	else
+		return 10
+	fi
+}
+
+### These last two will print errors and actually *exit* the shell on an error.
+
+# func basic_cmake_lib
+#
+#	parameter 1: lib name
+#	parameter 2: tarball URL
+#	parameter 3: compression type
+#	parameter 3: extra cmake flags
+#
+# Builds a library assuming it's a "normal" boilerplate cmake tarball.
+basic_cmake_lib ()
+{
+	NAME=${1}
+	URL=${2}
+	COMPRESSION=${3}
+	FLAGS=${4}
+
+	get_tarball ${NAME} ${URL} ${COMPRESSION}
+	if [ ${?} -eq 10 ]
+	then
+		echo "crossbuild_${NAME} failed: Could not get/extract ${NAME} source"
+		exit 1
+	fi
+
+	cmake_build ${SRC_ROOT_DIR}/${NAME}/* ${FLAGS}
+	case ${?} in
+		10)
+			echo "crossbuild_${NAME} failed: Could not find CMakeLists.txt"
+			echo "(is ${NAME} tarball sane?)"
+			exit 1
+			;;
+		20)
+			echo "crossbuild_${NAME} failed: Could not find Makefile"
+			echo "(did cmake fail?)"
+			exit 1
+			;;
+		*)
+			;;
+	esac
+}
+
+# func basic_autotools_lib
+#
+#	parameter 1: lib name
+#	parameter 2: tarball URL
+#	parameter 3: compression type
+#	parameter 4: extra configure flags
+#
+# Builds a library assuming it's a "normal" boilerplate autohell tarball.
+basic_autotools_lib ()
+{
+	NAME=${1}
+	URL=${2}
+	COMPRESSION=${3}
+	FLAGS=${4}
+
+	get_tarball ${NAME} ${URL} ${COMPRESSION}
+	if [ ${?} -eq 10 ]
+	then
+		echo "crossbuild_${NAME} failed: Could not get/extract ${NAME} source"
+		exit 1
+	fi
+
+	autotools_build ${SRC_ROOT_DIR}/${NAME}/* ${FLAGS}
+	case ${?} in
+		10)
+			echo "crossbuild_${NAME} failed: Could not find ./configure (is ${NAME} source tarball sane?)"
+			exit 1
+			;;
+		20)
+			echo "crossbuild_${NAME} failed: Could not find Makefile (did ./configure fail?)"
+			exit 1
+			;;
+		*)
+			;;
+	esac
+}

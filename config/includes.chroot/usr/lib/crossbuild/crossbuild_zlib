@@ -3,6 +3,9 @@
 # Builds and installs zlib for the cross toolchain.
 # Sourced from build-uqm-dependencies.chroot
 
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
 # envvar ZLIB_URL
 #
 # Specifies the URL of the zlib source tarball you want to use.
@@ -16,22 +19,9 @@ export PATH=/usr/${HOST_TRIPLET}/bin:${PATH}
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_zlib ---"
 
-cd /tmp
+get_tarball zlib ${ZLIB_URL} gz
 
-wget --output-document=/tmp/zlib.tar.gz ${ZLIB_URL}
-
-if [ -f zlib.tar.gz ]; then
-
-	if [ ! -d zlib ]; then 
-		mkdir zlib
-	fi
-
-	tar -zxf zlib.tar.gz -C zlib
-	cd zlib/zlib*
-else
-	echo "crossbuild_zlib failed: Could not get/extract zlib source"
-	exit 1
-fi
+cd ${SRC_ROOT_DIR}/zlib/*
 
 if [ -f win32/Makefile.gcc ]; then
 	echo "Running zlib's ./configure to trick it into making us a zlib.pc"

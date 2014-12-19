@@ -6,7 +6,7 @@ import glob
 # var script_path
 #
 # The location of the crossbuild_libfoo shellscripts we'll be working with
-script_path = "/usr/src/crossbuild/"
+script_path = "/usr/lib/crossbuild/"
 
 def build_pkgdict ():
 	'''

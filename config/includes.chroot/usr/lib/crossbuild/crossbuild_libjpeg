@@ -1,0 +1,20 @@
+#! /bin/sh
+#
+# Builds and installs libjpeg for the cross toolchain.
+# Sourced from build-uqm-dependencies.chroot
+
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
+# envvar LIBJPEG_URL
+#
+# Specifies the URL of the libjpeg source tarball you want to use.
+export LIBJPEG_URL="http://www.ijg.org/files/jpegsrc.v9.tar.gz"
+
+echo "*************************************************************************"
+echo "--- BEGIN: crossbuild_libjpeg ---"
+
+basic_autotools_lib libjpeg ${LIBJPEG_URL} gz ""
+
+echo "--- END: crossbuild_libjpeg ---"
+echo "*************************************************************************"

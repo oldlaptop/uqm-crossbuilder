@@ -1,0 +1,20 @@
+#! /bin/sh
+#
+# Builds and installs libfreetype for the cross toolchain.
+# Sourced from build-uqm-dependencies.chroot
+
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
+# envvar LIBFREETYPE_URL
+#
+# Specifies the URL of the libfreetype source tarball you want to use.
+export LIBFREETYPE_URL="http://download.savannah.gnu.org/releases/freetype/freetype-2.5.3.tar.gz"
+
+echo "*************************************************************************"
+echo "--- BEGIN: crossbuild_libfreetype ---"
+
+basic_cmake_lib libfreetype ${LIBFREETYPE_URL} gz "-DBUILD_SHARED_LIBS:BOOL=true"
+
+echo "--- END: crossbuild_libfreetype ---"
+echo "*************************************************************************"

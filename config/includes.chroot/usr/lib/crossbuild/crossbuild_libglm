@@ -3,6 +3,9 @@
 # Builds and installs libglm for the cross toolchain.
 # Sourced from build-uqm-dependencies.chroot
 
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
 # envvar LIBGLM_URL
 #
 # Specifies the URL of the libglm source tarball you want to use.
@@ -11,26 +14,19 @@ export LIBGLM_URL="https://sourceforge.net/projects/ogl-math/files/glm-0.9.4.4/g
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libglm ---"
 
-cd /tmp
-
-wget --output-document=/tmp/libglm.zip ${LIBGLM_URL}
-
-if [ -f libglm.zip ]; then
-
-	if [ ! -d libglm ]; then 
-		mkdir libglm
-	fi
-
-	unzip libglm.zip -d libglm
-	cd libglm/glm*
-else
+get_zipball libglm ${LIBGLM_URL}
+if [ ${?} -eq 10 ]
+then
 	echo "crossbuild_libglm failed: Could not get/extract libglm source"
 	exit 1
 fi
 
-if [ -d glm ]; then
+cd ${SRC_ROOT_DIR}/libglm/*
+
+if [ -d glm ]
+then
 	echo "Installing libglm"
-	cp -r glm  /usr/${HOST_TRIPLET}/include/
+	cp -R glm /usr/${HOST_TRIPLET}/include/
 
 else
 	echo "crossbuild_libglm failed: Could not find glm directory (is the libglm source tarball sane?)"
