@@ -15,7 +15,7 @@ export LIBVORBIS_URL="http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.3.
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libvorbis ---"
 
-basic_autotools_lib libvorbis ${LIBVORBIS_URL} gz ""
+basic_autotools_lib libvorbis "${LIBVORBIS_URL}" gz ""
 
 echo "--- END: crossbuild_libvorbis ---"
 echo "*************************************************************************"

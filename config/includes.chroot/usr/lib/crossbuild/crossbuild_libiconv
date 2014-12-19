@@ -14,7 +14,7 @@ export LIBICONV_URL="ftp://psg.mtu.edu/pub/gnu/libiconv/libiconv-1.14.tar.gz"
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libiconv ---"
 
-basic_autotools_lib libiconv ${LIBICONV_URL} gz ""
+basic_autotools_lib libiconv "${LIBICONV_URL}" gz ""
 
 echo "--- END: crossbuild_libiconv ---"
 echo "*************************************************************************"

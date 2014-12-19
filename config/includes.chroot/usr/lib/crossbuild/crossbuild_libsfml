@@ -29,7 +29,7 @@ echo "--- BEGIN: crossbuild_libsfml ---"
 
 cd ${SRC_ROOT_DIR}
 
-git clone ${LIBSFML_GIT_URL} libsfml-git
+git clone "${LIBSFML_GIT_URL}" libsfml-git
 
 if [ -d libsfml-git ]; then
 	cd libsfml-git

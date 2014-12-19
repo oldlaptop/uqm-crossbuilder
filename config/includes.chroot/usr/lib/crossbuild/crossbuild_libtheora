@@ -15,7 +15,7 @@ export LIBTHEORA_URL="http://downloads.xiph.org/releases/theora/libtheora-1.1.1.
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libtheora ---"
 
-basic_autotools_lib libtheora ${LIBTHEORA_URL} gz ""
+basic_autotools_lib libtheora "${LIBTHEORA_URL}" gz ""
 
 echo "--- END: crossbuild_libtheora ---"
 echo "*************************************************************************"

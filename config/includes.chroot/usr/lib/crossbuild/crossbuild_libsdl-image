@@ -19,7 +19,7 @@ export SDL_LIBS="-lmingw32 -lSDLmain -lSDL"
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libsdl_image ---"
 
-basic_autotools_lib libsdl_image ${LIBSDL_IMAGE_URL} gz "--with-sdl-prefix=/usr/${HOST_TRIPLET}"
+basic_autotools_lib libsdl_image "${LIBSDL_IMAGE_URL}" gz "--with-sdl-prefix=/usr/${HOST_TRIPLET}"
 
 echo "--- END: crossbuild_libsdl_image ---"
 echo "*************************************************************************"

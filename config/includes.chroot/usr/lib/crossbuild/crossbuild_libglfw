@@ -13,7 +13,7 @@ export LIBGLFW_URL="http://downloads.sourceforge.net/project/glfw/glfw/3.0.1/glf
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libglfw ---"
 
-basic_cmake_lib libglfw ${LIBGLFW_URL} bz2 ""
+basic_cmake_lib libglfw "${LIBGLFW_URL}" bz2 ""
 
 echo "--- END: crossbuild_libglfw ---"
 echo "********************************************************************************"

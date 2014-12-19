@@ -13,7 +13,7 @@ export LIBOPENAL_URL="http://kcat.strangesoft.net/openal-releases/openal-soft-1.
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libopenal ---"
 
-basic_cmake_lib libopenal ${LIBOPENAL_URL} bz2 ""
+basic_cmake_lib libopenal "${LIBOPENAL_URL}" bz2 ""
 
 echo "--- END: crossbuild_libopenal ---"
 echo "*************************************************************************"

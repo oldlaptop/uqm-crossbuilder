@@ -27,7 +27,7 @@ export PATH="/usr/${HOST_TRIPLET}/bin:${PATH}"
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libglew ---"
 
-get_tarball libglew ${LIBGLEW_URL} gz
+get_tarball libglew "${LIBGLEW_URL}" gz
 if [ ${?} -eq 10 ]
 then
 	echo "crossbuild_libglew failed: Could not get/extract libglew source"

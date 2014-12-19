@@ -14,7 +14,7 @@ export LIBSNDFILE_URL="http://www.mega-nerd.com/libsndfile/files/libsndfile-1.0.
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libsndfile ---"
 
-basic_autotools_lib libsndfile ${LIBSNDFILE_URL} gz ""
+basic_autotools_lib libsndfile "${LIBSNDFILE_URL}" gz ""
 
 echo "--- END: crossbuild_libsndfile ---"
 echo "*************************************************************************"

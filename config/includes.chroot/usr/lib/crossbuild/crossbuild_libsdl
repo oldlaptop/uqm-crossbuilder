@@ -15,7 +15,7 @@ export LIBSDL_URL="http://www.libsdl.org/release/SDL-1.2.15.tar.gz"
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libsdl ---"
 
-basic_autotools_lib libsdl ${LIBSDL_URL} gz ""
+basic_autotools_lib libsdl "${LIBSDL_URL}" gz ""
 
 echo "--- END: crossbuild_libsdl ---"
 echo "*************************************************************************"

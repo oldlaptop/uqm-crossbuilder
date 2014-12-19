@@ -14,7 +14,7 @@ export LIBFREETYPE_URL="http://download.savannah.gnu.org/releases/freetype/freet
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libfreetype ---"
 
-basic_cmake_lib libfreetype ${LIBFREETYPE_URL} gz "-DBUILD_SHARED_LIBS:BOOL=true"
+basic_cmake_lib libfreetype "${LIBFREETYPE_URL}" gz "-DBUILD_SHARED_LIBS:BOOL=true"
 
 echo "--- END: crossbuild_libfreetype ---"
 echo "*************************************************************************"

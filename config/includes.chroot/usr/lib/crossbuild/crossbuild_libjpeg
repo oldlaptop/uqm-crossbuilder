@@ -14,7 +14,7 @@ export LIBJPEG_URL="http://www.ijg.org/files/jpegsrc.v9.tar.gz"
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libjpeg ---"
 
-basic_autotools_lib libjpeg ${LIBJPEG_URL} gz ""
+basic_autotools_lib libjpeg "${LIBJPEG_URL}" gz ""
 
 echo "--- END: crossbuild_libjpeg ---"
 echo "*************************************************************************"

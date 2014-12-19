@@ -14,7 +14,7 @@ export LIBGLM_URL="https://sourceforge.net/projects/ogl-math/files/glm-0.9.4.4/g
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libglm ---"
 
-get_zipball libglm ${LIBGLM_URL}
+get_zipball libglm "${LIBGLM_URL}"
 if [ ${?} -eq 10 ]
 then
 	echo "crossbuild_libglm failed: Could not get/extract libglm source"

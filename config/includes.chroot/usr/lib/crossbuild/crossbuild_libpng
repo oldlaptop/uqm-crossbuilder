@@ -15,7 +15,7 @@ export LIBPNG_URL="ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpn
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libpng ---"
 
-basic_autotools_lib libpng ${LIBPNG_URL} xz ""
+basic_autotools_lib libpng "${LIBPNG_URL}" xz ""
 
 echo "--- END: crossbuild_libpng ---"
 echo "*************************************************************************"
