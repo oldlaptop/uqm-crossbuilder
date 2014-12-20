@@ -192,7 +192,7 @@ basic_cmake_lib ()
 	COMPRESSION=${3}
 	FLAGS=${4}
 
-	get_tarball ${NAME} ${URL} ${COMPRESSION}
+	get_tarball ${NAME} "${URL}" ${COMPRESSION}
 	if [ ${?} -eq 10 ]
 	then
 		echo "crossbuild_${NAME} failed: Could not get/extract ${NAME} source"
@@ -231,7 +231,7 @@ basic_autotools_lib ()
 	COMPRESSION=${3}
 	FLAGS=${4}
 
-	get_tarball ${NAME} ${URL} ${COMPRESSION}
+	get_tarball ${NAME} "${URL}" ${COMPRESSION}
 	if [ ${?} -eq 10 ]
 	then
 		echo "crossbuild_${NAME} failed: Could not get/extract ${NAME} source"
