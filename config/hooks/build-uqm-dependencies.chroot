@@ -61,8 +61,3 @@ done
 
 echo ""
 echo "Finished building UQM dependencies"
-
-echo ""
-echo "Perpetrating acts of horrific kludgery against the toolchain"
-
-. /usr/lib/crossbuild/toolchain-ugly-hacks
