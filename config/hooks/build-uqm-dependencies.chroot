@@ -51,12 +51,12 @@ then
 	exit 1
 fi
 
-# We now iterate over the lines in the output file from our dependency resolver, sourcing each
-# script listed in order.
+# We now iterate over the lines in the output file from our dependency resolver,
+# running each script listed in order.
 LINES=$(cat /tmp/script_list | wc -l)
 for LINE_NUMBER in $(seq ${LINES})
 do
-	. $(head /tmp/script_list -n${LINE_NUMBER} | tail -n1)
+	sh $(head /tmp/script_list -n${LINE_NUMBER} | tail -n1)
 done
 
 echo ""
