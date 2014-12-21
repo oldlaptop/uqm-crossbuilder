@@ -57,6 +57,10 @@ LINES=$(cat /tmp/script_list | wc -l)
 for LINE_NUMBER in $(seq ${LINES})
 do
 	sh $(head /tmp/script_list -n${LINE_NUMBER} | tail -n1)
+	if [ ${?} -ne 0 ]
+	then
+		exit 1
+	fi
 done
 
 echo ""
