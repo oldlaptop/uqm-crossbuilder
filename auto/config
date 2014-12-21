@@ -4,10 +4,12 @@
 # The URL of the Debian mirror to get packages from.
 export DEBIAN_MIRROR="ftp://debian.cse.msu.edu/debian/"
 
+# contrib is needed for virtualbox
 lb config noauto \
 	--apt-options "-y --force-yes"\
 	--apt-recommends false\
-	--distribution wheezy\
+	--distribution jessie\
+	--archive-areas "main contrib"\
 	-k 486\
 	--architecture i386\
 	--mirror-bootstrap ${DEBIAN_MIRROR}\

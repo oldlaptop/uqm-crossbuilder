@@ -100,6 +100,13 @@ if [ $? -ne 0 ]; then
     exit 5
 fi
 
+vboxmanage modifyvm "UQM_crossbuilder_001" --memory 256
+if [ $? -ne 0 ]; then
+    echo "!! vboxmanage returned an error while adjusting RAM size, canceling"
+    vboxmanage unregistervm "UQM_crossbuilder_001" -delete
+    exit 5
+fi
+
 # Give it a CD rom drive
 vboxmanage storagectl "UQM_crossbuilder_001" --name "cdrom_drive" --add ide --controller PIIX4
 if [ $? -ne 0 ]; then
