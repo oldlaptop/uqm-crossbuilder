@@ -1,0 +1,54 @@
+#! /bin/sh
+#
+# Builds and installs openssl for the cross toolchain.
+# Executed by build-uqm-dependencies.chroot
+
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
+# envvar OPENSSL_URL
+#
+# Specifies the URL of the openssl source tarball you want to use.
+export OPENSSL_URL="https://www.openssl.org/source/openssl-1.0.1j.tar.gz"
+
+# OpenSSL is... rather nasty to crossbuild. There is some sparse documentation
+# about crossbuilding in README.W32, but it doesn't seem to actually work.
+# However, somewhat like lua, it seems we can indeed fool it into at least
+# building with our cross toolchain by overriding $PATH. However, for reasons
+# unknown to humankind, this causes its makefile to hose the terminal,
+# apparently by attempting to execute Windows EXEs as shellscripts (yes really).
+# I wouldn't trust the result of this process for anything actually requiring
+# security if I were you (this script exists purely to get opusfile built).
+
+export PATH="/usr/${HOST_TRIPLET}/bin:${PATH}"
+echo $PATH
+
+echo "*************************************************************************"
+echo "--- BEGIN: crossbuild_openssl ---"
+
+get_tarball openssl ${OPENSSL_URL} gz
+
+cd ${SRC_ROOT_DIR}/openssl/*
+
+if [ -f Configure -a -f Makefile ]
+then
+	./Configure mingw \
+	                  --prefix=/usr/i686-w64-mingw32 \
+	                  --openssldir=/usr/i686-w64-mingw32/openssl
+
+	echo "Building OpenSSL. The OpenSSL makefiles screw up our terminal when we"
+	echo "cross-build. Build output will be placed under ${SRC_ROOT_DIR}/openssl/"
+	echo "in the finished live system."
+	
+	make clean > "${SRC_ROOT_DIR}/openssl/clean.log" 2>&1
+	make > "${SRC_ROOT_DIR}/openssl/build.log" 2>&1
+	make install > "${SRC_ROOT_DIR}/openssl/install.log" 2>&1
+else
+	echo "crossbuild_openssl failed; could not find Configure || Makefile"
+	echo "(is openssl tarball even less sane than usual?)"
+	exit 1
+fi
+
+
+echo "--- END: crossbuild_openssl ---"
+echo "*************************************************************************"

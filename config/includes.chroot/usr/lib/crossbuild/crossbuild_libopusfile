@@ -1,0 +1,29 @@
+#! /bin/sh
+#
+#@DEP@ libogg
+#@DEP@ libopus
+#@DEP@ openssl
+#      (yes, really)
+#
+# Builds and installs libopusfile for the cross toolchain.
+# Sourced from build-uqm-dependencies.chroot
+
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
+# envvar libopusfile_URL
+#
+# Specifies the URL of the libopusfile source tarball you want to use.
+export libopusfile_URL="https://ftp.mozilla.org/pub/mozilla.org/opus/opusfile-0.6.tar.gz"
+
+# This package doesn't seem to twig that maybe pkg_config should be told to look
+# in our cross toolchain for its stuff.
+export PKG_CONFIG_PATH="/usr/${HOST_TRIPLET}/lib/pkgconfig"
+
+echo "*************************************************************************"
+echo "--- BEGIN: crossbuild_libopusfile ---"
+
+basic_autotools_lib libopusfile ${libopusfile_URL} gz ""
+
+echo "--- END: crossbuild_libopusfile ---"
+echo "*************************************************************************"
