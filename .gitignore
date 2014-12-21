@@ -2,5 +2,8 @@
 binary/
 chroot/
 cache/
+binary.*
+__pycache__/
+build.log
 
 *~
