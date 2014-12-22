@@ -10,7 +10,7 @@ lb config noauto \
 	--apt-recommends false\
 	--distribution jessie\
 	--archive-areas "main contrib"\
-	-k 486\
+	-k 586\
 	--architecture i386\
 	--mirror-bootstrap ${DEBIAN_MIRROR}\
 	--mirror-binary ${DEBIAN_MIRROR}\
