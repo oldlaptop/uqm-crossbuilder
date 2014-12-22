@@ -24,7 +24,6 @@ LIVE_USER="fwiffo"
 LIVE_PASSWORD="live"
 VANILLA_EXE="uqm.exe"
 BALANCE_EXE="uqm-improved-netmelee.exe"
-#BALANCE_RETREAT_EXE="uqm-balance-retreat.exe"
 EFFECTS_PACK="improved-netmelee-effects.zip"
 BUILD_VANILLA="false"
 BUILD_BMOD="false"
@@ -43,7 +42,6 @@ cleanup ()
     echo "== Deleting the VM"
     vboxmanage unregistervm "UQM_crossbuilder_001" -delete
     echo "== Deleting the temporary hard drive"
-    rm ./testhd.vdi
 }
 
 if [ `echo $@ | grep "clean"` ]; then
@@ -102,21 +100,11 @@ if [ $? -ne 0 ]; then
     exit 5
 fi
 
-# Give it a hard drive
-vboxmanage createhd --filename ./testhd --size 1024
-if [ $? -ne 0 ]; then
-    echo "!! vboxmanage returned an error while creating a hard drive, canceling"
-    rm ./testhd*
-    vboxmanage unregistervm "UQM_crossbuilder_001" -delete
-    exit 5
-fi
-
 # Give it a CD rom drive
 vboxmanage storagectl "UQM_crossbuilder_001" --name "cdrom_drive" --add ide --controller PIIX4
 if [ $? -ne 0 ]; then
     echo "!! vboxmanage returned an error while creating a cd rom drive, canceling"
     vboxmanage unregistervm "UQM_crossbuilder_001" -delete
-    rm ./testhd*
     exit 5
 fi
 
@@ -249,12 +237,7 @@ if [ $BUILD_BMOD = "true" ]; then
     else
         echo "!! Balance Mod exe not found. Something went wrong :("
     fi
-#     if [ -f $SHARED_DIR/$BALANCE_RETREAT_EXE ]; then
-#         echo "== Copying the balance mod retreat exe to the current dir: $BALANCE_RETREAT_EXE"
-#         cp $SHARED_DIR/$BALANCE_RETREAT_EXE $CURRENT_DIR
-#     else
-#         echo "!! Balance Mod Retreat exe not found. Something went wrong :("
-#    fi
+
     if [ -f $SHARED_DIR/$EFFECTS_PACK ]; then
         echo "== Copying the effects pack to current dir: $EFFECTS_PACK"
         cp $SHARED_DIR/$EFFECTS_PACK $CURRENT_DIR
