@@ -1,0 +1,31 @@
+#! /bin/sh
+#@DEP@ libiconv
+#
+# Builds and installs libsdl2 for the cross toolchain.
+# Executed by build-uqm-dependencies.chroot
+
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
+# envvar LIBSDL_URL
+#
+# Specifies the URL of the libsdl2 source tarball you want to use.
+export LIBSDL2_URL="http://libsdl.org/release/SDL2-2.0.3.tar.gz"
+
+echo "*************************************************************************"
+echo "--- BEGIN: crossbuild_libsdl2 ---"
+
+get_tarball libsdl2 "${LIBSDL2_URL}" gz
+
+patch_source libsdl2 "libsdl2-1-winapifamily.h.patch"
+
+if [ ${?} -eq 10 ]
+then
+	echo "crossbuild_libsdl2 failed; could not apply patch(es)"
+	exit 1
+fi
+
+autotools_build ${SRC_ROOT_DIR}/libsdl2/* ""
+
+echo "--- END: crossbuild_libsdl2 ---"
+echo "*************************************************************************"

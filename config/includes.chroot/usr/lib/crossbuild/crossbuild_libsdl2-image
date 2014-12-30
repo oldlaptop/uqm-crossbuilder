@@ -1,0 +1,25 @@
+#! /bin/sh
+#@DEP@ libsdl2
+#@DEP@ libpng
+#
+# Builds and installs libsdl_image for the cross toolchain.
+# Executed by build-uqm-dependencies.chroot
+
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
+# envvar LIBSDL2_IMAGE_URL
+#
+# Specifies the URL of the libsdl2_image source tarball you want to use.
+export LIBSDL2_IMAGE_URL="http://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz"
+
+# libsdl_image is an SDL package, and thus we need some extra LDFLAGS for SDL
+export SDL_LIBS="-lmingw32 -lSDLmain -lSDL"
+
+echo "*************************************************************************"
+echo "--- BEGIN: crossbuild_libsdl_image ---"
+
+basic_autotools_lib libsdl2_image "${LIBSDL2_IMAGE_URL}" gz "--with-sdl-prefix=/usr/${HOST_TRIPLET}"
+
+echo "--- END: crossbuild_libsdl_image ---"
+echo "*************************************************************************"
