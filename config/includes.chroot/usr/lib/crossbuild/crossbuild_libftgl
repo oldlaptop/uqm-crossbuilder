@@ -36,5 +36,18 @@ cd ${SRC_ROOT_DIR}/libftgl/*
 
 autotools_build ${SRC_ROOT_DIR}/libftgl/* "--with-ft-prefix=/usr/${HOST_TRIPLET}/ --with-gl-inc=/usr/${HOST_TRIPLET}/include/ --with-gl-lib=/usr/${HOST_TRIPLET}/lib/opengl32.a"
 
+case ${?} in
+	10)
+		echo "crossbuild_libftgl failed: Could not find ./configure (is libftgl source tarball sane?)"
+		exit 1
+		;;
+	20)
+		echo "crossbuild_libftgl failed: Could not find Makefile (did ./configure fail?)"
+		exit 1
+		;;
+	*)
+		;;
+esac
+
 echo "--- END: crossbuild_libftgl ---"
 echo "*************************************************************************"
