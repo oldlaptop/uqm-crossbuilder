@@ -87,6 +87,24 @@ get_zipball ()
 	fi
 }
 
+# Rudimentary patch applicator. Called as patch_source name "<patch list>"
+patch_source ()
+{
+        LIBNAME=${1}
+        PATCHES="${2}"
+
+        cd ${SRC_ROOT_DIR}/${LIBNAME}/*
+
+        for CUR_PATCH in ${PATCHES}
+        do
+                patch -p1 -F0 < ${SRC_ROOT_DIR}/${CUR_PATCH}
+                if [ ${?} -ne 0 ]
+                then
+                        return 10
+                fi
+        done
+}
+
 # func makefile_build
 #
 #	parameter 1: directory containing the Makefile
