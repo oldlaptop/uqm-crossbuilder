@@ -2,6 +2,7 @@ build-essential
 cmake
 autoconf
 automake
+libtool
 
 mingw-w64-i686-dev
 binutils-mingw-w64-i686

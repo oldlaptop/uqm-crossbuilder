@@ -14,7 +14,16 @@ export LIBFREETYPE_URL="http://download.savannah.gnu.org/releases/freetype/freet
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libfreetype ---"
 
-basic_cmake_lib libfreetype "${LIBFREETYPE_URL}" gz "-DBUILD_SHARED_LIBS:BOOL=true"
+get_tarball libfreetype "${LIBFREETYPE_URL}" gz
+if [ ${?} -eq 10 ]
+then
+	echo "crossbuild_libfreetype failed: Could not get/extract libfreetype source"
+	exit 1
+fi
+
+# We do this twice, once for shared libs and once for static libs.
+cmake_build ${SRC_ROOT_DIR}/libfreetype/* "-DBUILD_SHARED_LIBS:BOOL=true"
+cmake_build ${SRC_ROOT_DIR}/libfreetype/* "-DBUILD_SHARED_LIBS:BOOL=false"
 
 echo "--- END: crossbuild_libfreetype ---"
 echo "*************************************************************************"
