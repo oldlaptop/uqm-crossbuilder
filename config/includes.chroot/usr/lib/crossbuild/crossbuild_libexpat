@@ -1,0 +1,20 @@
+#! /bin/sh
+#
+# Builds and installs libexpat for the cross toolchain.
+# Sourced from build-uqm-dependencies.chroot
+
+# Include our common functions
+. /usr/lib/crossbuild/crossbuild.subr
+
+# envvar libexpat_URL
+#
+# Specifies the URL of the libexpat source tarball you want to use.
+export LIBEXPAT_URL="http://downloads.sourceforge.net/project/expat/expat/2.1.0/expat-2.1.0.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fexpat%2Ffiles%2Fexpat%2F2.1.0%2F&ts=1420050459&use_mirror=softlayer-dal"
+
+echo "*************************************************************************"
+echo "--- BEGIN: crossbuild_libexpat ---"
+
+basic_autotools_lib libexpat ${LIBEXPAT_URL} gz ""
+
+echo "--- END: crossbuild_libexpat ---"
+echo "*************************************************************************"
