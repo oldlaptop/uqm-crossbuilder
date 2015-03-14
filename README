@@ -10,5 +10,5 @@ http://live.debian.net/manual-3.x/html/live-manual.en.html#100
 2) Run 'lb config' from within this repo's root
 3) Run 'lb build' to create the ISO (must have root/fakeroot)
 
-Prebuilt ISOs are available at 
-https://sourceforge.net/projects/oldlaptop.u/files/uqm-crossbuilder/
+Prebuilt ISOs are available at:
+https://sourceforge.net/projects/uqm-crossbuilder/files/
