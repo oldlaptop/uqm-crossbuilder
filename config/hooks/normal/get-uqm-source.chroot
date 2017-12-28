@@ -5,7 +5,7 @@
 # envvar UQM_URL
 #
 # URL of the desired UQM source tarball.
-export UQM_URL="http://downloads.sourceforge.net/project/sc2/UQM/0.7/uqm-0.7.0-source.tgz"
+export UQM_URL="https://downloads.sourceforge.net/project/sc2/UQM/0.7/uqm-0.7.0-source.tgz"
 
 echo "Getting UQM source tarball"
 

@@ -2,15 +2,18 @@
 
 # envvar DEBIAN_MIRROR
 # The URL of the Debian mirror to get packages from.
-export DEBIAN_MIRROR="ftp://debian.cse.msu.edu/debian/"
+export DEBIAN_MIRROR="http://ftp.us.debian.org/debian/"
 
 lb config noauto \
+	--archive-areas "main contrib non-free"\
 	--apt-options "-y --force-yes"\
 	--apt-recommends false\
-	--distribution wheezy\
-	-k 486\
+	--distribution stretch\
+	-k 586\
 	--architecture i386\
 	--mirror-bootstrap ${DEBIAN_MIRROR}\
+	--mirror-chroot ${DEBIAN_MIRROR}\
 	--mirror-binary ${DEBIAN_MIRROR}\
+	--backports true\
 	--bootappend-live "boot=live config hostname=uqm-crossbuilder username=fwiffo"\
 	"${@}"

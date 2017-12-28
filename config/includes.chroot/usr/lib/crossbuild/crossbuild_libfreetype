@@ -9,7 +9,7 @@
 # envvar LIBFREETYPE_URL
 #
 # Specifies the URL of the libfreetype source tarball you want to use.
-export LIBFREETYPE_URL="http://download.savannah.gnu.org/releases/freetype/freetype-2.5.3.tar.gz"
+export LIBFREETYPE_URL="https://download.savannah.gnu.org/releases/freetype/freetype-2.5.3.tar.gz"
 
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libfreetype ---"

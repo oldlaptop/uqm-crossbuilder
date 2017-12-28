@@ -9,7 +9,7 @@
 # envvar LIBOPUS_URL
 #
 # Specifies the URL of the libopus source tarball you want to use.
-export LIBOPUS_URL="http://downloads.xiph.org/releases/opus/opus-1.1.tar.gz"
+export LIBOPUS_URL="https://downloads.xiph.org/releases/opus/opus-1.1.tar.gz"
 
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libopus ---"

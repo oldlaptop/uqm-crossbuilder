@@ -10,7 +10,7 @@
 # envvar LIBTHEORA_URL
 #
 # Specifies the URL of the libtheora source tarball you want to use.
-export LIBTHEORA_URL="http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.gz"
+export LIBTHEORA_URL="https://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.gz"
 
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libtheora ---"

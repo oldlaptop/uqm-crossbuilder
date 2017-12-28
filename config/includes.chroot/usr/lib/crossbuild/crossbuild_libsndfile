@@ -9,7 +9,7 @@
 # envvar LIBSNDFILE_URL
 #
 # Specifies the URL of the libsndfile source tarball you want to use.
-export LIBSNDFILE_URL="http://www.mega-nerd.com/libsndfile/files/libsndfile-1.0.25.tar.gz"
+export LIBSNDFILE_URL="https://www.mega-nerd.com/libsndfile/files/libsndfile-1.0.25.tar.gz"
 
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libsndfile ---"

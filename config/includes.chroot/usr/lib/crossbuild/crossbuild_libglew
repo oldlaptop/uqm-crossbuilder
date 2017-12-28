@@ -9,7 +9,7 @@
 # envvar LIBGLEW_URL
 #
 # Specifies the URL of the libglew source tarball you want to use.
-export LIBGLEW_URL="http://downloads.sourceforge.net/project/glew/glew/1.9.0/glew-1.9.0.tgz?r=http%3A%2F%2Fglew.sourceforge.net%2F&ts=1372111704&use_mirror=iweb"
+export LIBGLEW_URL="https://downloads.sourceforge.net/project/glew/glew/1.9.0/glew-1.9.0.tgz?r=http%3A%2F%2Fglew.sourceforge.net%2F&ts=1372111704&use_mirror=iweb"
 
 # GLEW uses some silly custom makefiles - there exists one for crossbuilding,
 # but it is evil and defines its CC and LD incorrectly (it's probably made for

@@ -9,7 +9,7 @@
 # envvar LIBJPEG_URL
 #
 # Specifies the URL of the libjpeg source tarball you want to use.
-export LIBJPEG_URL="http://www.ijg.org/files/jpegsrc.v9.tar.gz"
+export LIBJPEG_URL="https://www.ijg.org/files/jpegsrc.v9.tar.gz"
 
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libjpeg ---"

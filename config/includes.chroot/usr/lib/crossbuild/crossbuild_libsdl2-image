@@ -11,7 +11,7 @@
 # envvar LIBSDL2_IMAGE_URL
 #
 # Specifies the URL of the libsdl2_image source tarball you want to use.
-export LIBSDL2_IMAGE_URL="http://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz"
+export LIBSDL2_IMAGE_URL="https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz"
 
 # libsdl_image is an SDL package, and thus we need some extra LDFLAGS for SDL
 export SDL_LIBS="-lmingw32 -lSDLmain -lSDL"

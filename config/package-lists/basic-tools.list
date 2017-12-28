@@ -9,8 +9,9 @@ unzip
 links2
 less
 file
-openssh-blacklist
-openssh-blacklist-extra
+#openssh-blacklist
+#openssh-blacklist-extra
+ca-certificates
 sudo
 
 

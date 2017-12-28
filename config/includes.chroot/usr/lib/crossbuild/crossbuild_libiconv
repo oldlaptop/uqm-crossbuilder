@@ -9,7 +9,7 @@
 # envvar LIBICONV_URL
 #
 # Specifies the URL of the libiconv source tarball you want to use.
-export LIBICONV_URL="ftp://psg.mtu.edu/pub/gnu/libiconv/libiconv-1.14.tar.gz"
+export LIBICONV_URL="https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz"
 
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libiconv ---"

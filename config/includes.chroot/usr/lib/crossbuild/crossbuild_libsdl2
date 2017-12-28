@@ -10,7 +10,7 @@
 # envvar LIBSDL_URL
 #
 # Specifies the URL of the libsdl2 source tarball you want to use.
-export LIBSDL2_URL="http://libsdl.org/release/SDL2-2.0.3.tar.gz"
+export LIBSDL2_URL="https://libsdl.org/release/SDL2-2.0.3.tar.gz"
 
 echo "*************************************************************************"
 echo "--- BEGIN: crossbuild_libsdl2 ---"

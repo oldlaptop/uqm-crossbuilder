@@ -11,7 +11,7 @@
 # envvar LIBFONTCONFIG_URL
 #
 # Specifies the URL of the libfontconfig source tarball you want to use.
-export LIBFONTCONFIG_URL="http://www.freedesktop.org/software/fontconfig/release/fontconfig-2.11.91.tar.bz2"
+export LIBFONTCONFIG_URL="https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.11.91.tar.bz2"
 
 # This needs to be handed libfreetype on a silver platter.
 export FREETYPE_CFLAGS="-I/usr/${HOST_TRIPLET}/include/freetype2"
