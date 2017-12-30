@@ -9,8 +9,8 @@ export DEBIAN_MIRROR_BUILD="http://ftp.us.debian.org/debian/"
 # The URL of the Debian mirror to configure in the live system.
 export DEBIAN_MIRROR_LIVE="${DEBIAN_MIRROR_CHROOT}"
 
-ln config/hooks/normal/build-uqm-dependencies.chroot config/includes.chroot/usr/bin/build-uqm-dependencies.sh
-ln config/hooks/normal/toolchain-ugly-hacks.chroot config/includes.chroot/usr/bin/toolchain-ugly-hacks.sh
+ln config/hooks/normal/1200-build-uqm-dependencies.chroot config/includes.chroot/usr/bin/build-uqm-dependencies.sh
+ln config/hooks/normal/1100-toolchain-ugly-hacks.chroot config/includes.chroot/usr/bin/toolchain-ugly-hacks.sh
 
 lb config noauto \
 	--archive-areas "main contrib non-free"\
