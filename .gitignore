@@ -1,9 +1,24 @@
 .build/
 binary/
 chroot/
+chroot.*
 cache/
-binary.*
+live-image-*
 __pycache__/
 build.log
 
 *~
+
+config/hooks/normal/0*
+config/package-lists/live.list.chroot
+
+config/binary
+config/bootstrap
+config/build
+config/chroot
+config/common
+config/hooks/live/
+config/source
+
+config/includes.chroot/usr/bin/toolchain-ugly-hacks.sh
+config/includes.chroot/usr/bin/build-uqm-dependencies.sh
