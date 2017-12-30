@@ -1,9 +1,13 @@
 #!/bin/sh
 set -v # ideally it'll be hard to miss the hardlinks being made below
 
-# envvar DEBIAN_MIRROR
-# The URL of the Debian mirror to get packages from.
-export DEBIAN_MIRROR="http://ftp.us.debian.org/debian/"
+# envvar DEBIAN_MIRROR_BUILD
+# The URL of the Debian mirror to get packages from during the build process.
+export DEBIAN_MIRROR_BUILD="http://ftp.us.debian.org/debian/"
+
+# envvar DEBIAN_MIRROR_LIVE
+# The URL of the Debian mirror to configure in the live system.
+export DEBIAN_MIRROR_LIVE="${DEBIAN_MIRROR_CHROOT}"
 
 ln config/hooks/normal/build-uqm-dependencies.chroot config/includes.chroot/usr/bin/build-uqm-dependencies.sh
 ln config/hooks/normal/toolchain-ugly-hacks.chroot config/includes.chroot/usr/bin/toolchain-ugly-hacks.sh
@@ -15,9 +19,10 @@ lb config noauto \
 	--distribution stretch\
 	-k 586\
 	--architecture i386\
-	--mirror-bootstrap ${DEBIAN_MIRROR}\
-	--mirror-chroot ${DEBIAN_MIRROR}\
-	--mirror-binary ${DEBIAN_MIRROR}\
+	--mirror-bootstrap ${DEBIAN_MIRROR_BUILD}\
+	--mirror-chroot ${DEBIAN_MIRROR_BUILD}\
+	--mirror-binary ${DEBIAN_MIRROR_LIVE}\
 	--backports true\
 	--bootappend-live "boot=live config hostname=uqm-crossbuilder username=fwiffo"\
+	--initsystem sysvinit\
 	"${@}"
