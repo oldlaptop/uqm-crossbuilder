@@ -1,4 +1,4 @@
-python3
+tcl
 pkg-config
 ssh
 git
@@ -13,5 +13,3 @@ file
 #openssh-blacklist-extra
 ca-certificates
 sudo
-
-

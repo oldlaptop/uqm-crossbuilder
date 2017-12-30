@@ -1,0 +1,76 @@
+# This functions basically as a dependency manifest. It is converted to a full
+# makefile at build time (by mkgen.tcl); you can pretend there's a new implicit
+# rule to crossbuild libraries instead of making C objects.
+#
+# The added syntax: if a target begins with %, it is parsed for replacement. The
+# entire line is checked for occurences of &, which is replaced with the literal
+# string '$(STAMP_DIR)/'. Its body is prepended with the following (where <name>
+# is the target's name, minus the leading %):
+#
+#	$(SH) $(CB_PREFIX)/crossbuild_<name>
+#	touch $(STAMP_DIR)/<name>
+#
+# Additionally, a rule is generated with the target $(STAMP_DIR)/<name> and the
+# single dependency <name>, i.e.
+#
+# $(STAMP_DIR)/<name>: <name>
+#
+# In practice, this means the target's name begins with %, its dependencies
+# begin with &, and its body is blank; while extra commands could be placed in
+# this file, they belong in the build scripts. This also implies that target
+# names (which presumably could be used as dependency names) should not contain
+# '&', although strictly speaking this is not an error.
+
+SH = /bin/sh
+STAMP_DIR = $(SRC_ROOT_DIR)/stamps
+
+%libexpat:
+
+%libfontconfig: &libexpat
+
+%libfreetype:
+
+%libftgl: &libfreetype
+
+%libglew:
+
+%libglfw:
+
+%libglm:
+
+%libiconv:
+
+%libjpeg:
+
+%liblua51:
+
+%libogg:
+
+%libopenal:
+
+%libopus:
+
+# yes, it really needs ssl.
+%libopusfile: &libogg &libopus &openssl
+
+%libpng: &zlib
+
+%libsdl: &libiconv
+
+%libsdl-image: &libsdl &libpng
+
+%libsdl2: &libiconv
+
+%libsdl2-image: &libsdl2 &libpng
+
+%libsmfl: &libfreetype &libglew &libjpeg &libopenal &libsndfile
+
+%libsndfile:
+
+%libtheora: &libogg
+
+%libvorbis: &libogg
+
+%libopenssl:
+
+%zlib:

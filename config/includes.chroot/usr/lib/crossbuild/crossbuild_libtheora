@@ -1,8 +1,6 @@
 #! /bin/sh
-#@DEP@ libogg
 #
 # Builds and installs libtheora for the cross toolchain.
-# Executed by build-uqm-dependencies.chroot
 
 # Include our common functions
 . /usr/lib/crossbuild/crossbuild.subr

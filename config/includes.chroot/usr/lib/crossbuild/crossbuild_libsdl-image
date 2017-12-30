@@ -1,9 +1,6 @@
 #! /bin/sh
-#@DEP@ libsdl
-#@DEP@ libpng
 #
 # Builds and installs libsdl_image for the cross toolchain.
-# Executed by build-uqm-dependencies.chroot
 
 # Include our common functions
 . /usr/lib/crossbuild/crossbuild.subr

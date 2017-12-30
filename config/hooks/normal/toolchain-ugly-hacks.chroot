@@ -1,5 +1,5 @@
 #! /bin/bash
-#
+set -e
 # This script perpetrates various terrifyingly ugly acts of kludgery against
 # the cross toolchain so UQM will find all the libs it needs. Please, please
 # do not use this script if you don't intend to build UQM with the live system.

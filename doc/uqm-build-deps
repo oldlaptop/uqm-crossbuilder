@@ -1,17 +1,20 @@
 The process for automatically crossbuilding libraries now has three steps:
 
- * live-build calls build-uqm-dependencies.chroot, which sets up the environment,
-   builds a bin/ directory for the cross toolchain (used by less enlightened
-   build systems, including UQM's build system) and executes the next two steps.
+ * live-build calls build-uqm-dependencies.chroot, which sets up the
+   environment, builds a bin/ directory for the cross toolchain (used by less
+   enlightened build systems, including UQM's build system) and executes the
+   next two steps.
 
- * build-uqm-depencencies.chroot calls depengine.py with a list of needed
-   libraries. depengine.py resolves dependencies (making sure all libraries
-   have their dependencies installed before we try to build them), and writes
-   a list of build scripts to a temporary file.
+ * build-uqm-depencencies.chroot runs the script (relative to the chroot)
+   /usr/lib/crossbuild/mkgen.tcl, which converts
+   /usr/lib/crossbuild/crossbuild.mk.in into a normal usable makefile (at
+   /usr/lib/crossbuild/crossbuild.mk). crossbuild.mk.in is effectively a
+   dependency manifest for the libraries.
 
- * Finally, we abuse head/tail and command substitution to run each build script
-   specified in the temporary file. These build scripts each download, build,
-   and install one library.
+ * We call make on the generated makefile, which in turn calls the build scripts
+   /usr/lib/crossbuild/crossbuild_* to do the actual work. Dependency resolution
+   is done dynamically by make, providing flexibility for sets of libraries
+   other than that needed by uqm.
 
 The build scripts themselves are modularized; there are two generic functions
 (basic_autotools_lib and basic_cmake_lib) which can build most normal libraries

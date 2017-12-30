@@ -1,9 +1,4 @@
 #! /bin/sh
-#@DEP@ libfreetype
-#@DEP@ libglew
-#@DEP@ libjpeg
-#@DEP@ libopenal
-#@DEP@ libsndfile
 #
 # Builds and installs libsfml for the cross toolchain.
 

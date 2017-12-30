@@ -1,8 +1,12 @@
 #!/bin/sh
+set -v # ideally it'll be hard to miss the hardlinks being made below
 
 # envvar DEBIAN_MIRROR
 # The URL of the Debian mirror to get packages from.
 export DEBIAN_MIRROR="http://ftp.us.debian.org/debian/"
+
+ln config/hooks/normal/build-uqm-dependencies.chroot config/includes.chroot/usr/bin/build-uqm-dependencies.sh
+ln config/hooks/normal/toolchain-ugly-hacks.chroot config/includes.chroot/usr/bin/toolchain-ugly-hacks.sh
 
 lb config noauto \
 	--archive-areas "main contrib non-free"\

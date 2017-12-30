@@ -1,0 +1,8 @@
+If you've never heard of 'stamps', these are empty files touch(1)ed by a
+makefile during the build process to indicate a package has been built
+(so that make(1)'s dependency resolver will consider the dependency met).
+
+If you wanted to rebuild all of the libraries in a running live system,
+you could delete these files to force the build process to consider them
+un-built. If you're reading the uqm-crossbuilder sources, there is nothing
+to see here.

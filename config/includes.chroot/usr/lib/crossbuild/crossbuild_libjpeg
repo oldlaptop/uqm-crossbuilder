@@ -1,7 +1,6 @@
 #! /bin/sh
 #
 # Builds and installs libjpeg for the cross toolchain.
-# Executed by build-uqm-dependencies.chroot
 
 # Include our common functions
 . /usr/lib/crossbuild/crossbuild.subr

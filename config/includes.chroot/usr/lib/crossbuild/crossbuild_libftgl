@@ -1,9 +1,6 @@
 #! /bin/sh
 #
-#@DEP@ libfreetype
-#
 # Builds and installs libftgl for the cross toolchain.
-# Executed by build-uqm-dependencies.chroot
 
 # Include our common functions
 . /usr/lib/crossbuild/crossbuild.subr

@@ -1,4 +1,7 @@
 #!/bin/sh
+set -v # ideally it'll be hard to miss the symlinks being removed below
+
+rm config/includes.chroot/usr/bin/build-uqm-dependencies.sh config/includes.chroot/usr/bin/toolchain-ugly-hacks.sh
 
 lb clean noauto "${@}"
 

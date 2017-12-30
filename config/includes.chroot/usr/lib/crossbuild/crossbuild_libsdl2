@@ -1,8 +1,6 @@
 #! /bin/sh
-#@DEP@ libiconv
 #
 # Builds and installs libsdl2 for the cross toolchain.
-# Executed by build-uqm-dependencies.chroot
 
 # Include our common functions
 . /usr/lib/crossbuild/crossbuild.subr
