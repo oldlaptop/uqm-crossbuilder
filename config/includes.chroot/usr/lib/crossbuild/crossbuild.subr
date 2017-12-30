@@ -121,7 +121,7 @@ makefile_build ()
 
 	if [ -f Makefile ]; then
 		make ${MAKE_FLAGS} clean
-		make ${MAKE_FLAGS}
+		make ${MAKE_FLAGS} -j$(nproc)
 		make ${MAKE_FLAGS} install
 	else
 		return 20
