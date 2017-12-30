@@ -7,13 +7,14 @@ export DEBIAN_MIRROR_BUILD="http://ftp.us.debian.org/debian/"
 
 # envvar DEBIAN_MIRROR_LIVE
 # The URL of the Debian mirror to configure in the live system.
-export DEBIAN_MIRROR_LIVE="${DEBIAN_MIRROR_CHROOT}"
+export DEBIAN_MIRROR_LIVE="${DEBIAN_MIRROR_BUILD}"
 
 ln config/hooks/normal/1200-build-uqm-dependencies.chroot config/includes.chroot/usr/bin/build-uqm-dependencies.sh
 ln config/hooks/normal/1100-toolchain-ugly-hacks.chroot config/includes.chroot/usr/bin/toolchain-ugly-hacks.sh
 
 lb config noauto \
 	--archive-areas "main contrib non-free"\
+	--initsystem sysvinit\
 	--apt-options "-y --force-yes"\
 	--apt-recommends false\
 	--distribution stretch\
@@ -24,5 +25,4 @@ lb config noauto \
 	--mirror-binary ${DEBIAN_MIRROR_LIVE}\
 	--backports true\
 	--bootappend-live "boot=live config hostname=uqm-crossbuilder username=fwiffo"\
-	--initsystem sysvinit\
 	"${@}"
