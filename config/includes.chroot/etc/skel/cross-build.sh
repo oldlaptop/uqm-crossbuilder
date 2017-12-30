@@ -42,4 +42,10 @@ export PATH=$CROSS_ROOT/bin:$PATH
 # (according to UQM documentation)
 unset ENV BASH_ENV
 
+# Enable parallel building if requested
+if [ $PARALLEL ]
+then
+	export MAKEFLAGS=-j$(nproc)
+fi
+
 ./build.sh $@
