@@ -1,8 +1,8 @@
-This directory contains shellscripts used to download and crossbuild
-UQM's build dependencies during the process of building this live image.
+This directory contains scripts used to download and crossbuild UQM's build
+dependencies during the process of building this live image.
 
 None of the files in this directory should be run directly, please run
 /usr/bin/build-uqm-dependencies.sh instead if you must reinstall UQM
 build dependencies in a running image. If you are looking at the live-build
-sources and intend to build a copy of this image, you do not need to do anything;
-these scripts are executed automatically during the build process.
+sources and intend to build a copy of this image, you do not need to do
+anything; these scripts are executed automatically during the build process.

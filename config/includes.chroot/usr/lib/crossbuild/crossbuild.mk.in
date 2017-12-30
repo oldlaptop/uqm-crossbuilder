@@ -3,9 +3,9 @@
 # rule to crossbuild libraries instead of making C objects.
 #
 # The added syntax: if a target begins with %, it is parsed for replacement. The
-# entire line is checked for occurences of &, which is replaced with the literal
-# string '$(STAMP_DIR)/'. Its body is prepended with the following (where <name>
-# is the target's name, minus the leading %):
+# dependencies are checked for occurences of &, which is replaced with the
+# literal string '$(STAMP_DIR)/'. Its body is prepended with the following
+# (where <name> is the target's name, minus the leading %):
 #
 #	$(SH) $(CB_PREFIX)/crossbuild_<name>
 #	touch $(STAMP_DIR)/<name>

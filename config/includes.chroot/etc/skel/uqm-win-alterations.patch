@@ -1,5 +1,5 @@
-This patch makes a change so that UQM will find zlib. Please apply this to
-any UQM source tree you try to build:
+This patch makes a change so that UQM will find zlib. You may need to apply this
+to the UQM source tree to make it build:
 
 patch -p0 < ~/uqm-win-alterations.patch
 
