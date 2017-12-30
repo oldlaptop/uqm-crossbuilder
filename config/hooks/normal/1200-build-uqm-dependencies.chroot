@@ -1,0 +1,14 @@
+#! /bin/sh
+set -e
+# Takes care of cross-building the different UQM depencencies.
+
+. /usr/lib/crossbuild/crossbuild.vars
+
+echo "Crossbuilding UQM depenencies"
+echo ""
+
+${CB_PREFIX}/mkgen.tcl
+make -f ${CB_PREFIX}/crossbuild.mk libsdl libsdl-image libogg libvorbis zlib
+
+echo ""
+echo "Finished building UQM dependencies"

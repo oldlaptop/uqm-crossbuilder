@@ -1,0 +1,26 @@
+#! /bin/bash
+set -e
+# This script perpetrates various acts of kludgery against the cross toolchain.
+
+. /usr/lib/crossbuild/crossbuild.vars
+
+echo ""
+echo "Perpetrating acts of horrific kludgery against the toolchain..."
+
+# Get a list of all our cross-tools in /usr/bin
+find /usr/bin | grep ${HOST_TRIPLET} > /tmp/prefixed-tools
+
+# Make symlinks for all of them under /usr/${HOST_PREFIX}, stripping prefixes
+LINES=$(cat /tmp/prefixed-tools | wc -l)
+for LINE_NUMBER in $(seq ${LINES})
+do
+	TARGET=$(head /tmp/prefixed-tools -n${LINE_NUMBER} | tail -n1)
+
+	# Replace the first component of the path, also clobbering the prefix
+	LINK=$(echo ${TARGET} | sed "s|/usr/bin/${HOST_TRIPLET}-|/usr/${HOST_TRIPLET}/bin/|")
+
+	if [ ! -e ${LINK} ]
+	then
+		ln -s ${TARGET} ${LINK}
+	fi
+done
